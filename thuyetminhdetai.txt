@@ -1,0 +1,92 @@
+THUYẾT MINH ĐỀ TÀI
+Tìm kiếm biển báo giao thông đường bộ Việt Nam bằng phương pháp Embeddings
+1. Lý do chọn đề tài
+Biển báo giao thông là một trong những phần quan trọng trong hệ thống an toàn giao thông đường bộ. Việc nhận diện chính xác biển báo giúp người tham gia giao thông tuân thủ đúng luật, đồng thời là nền tảng cho các hệ thống hỗ trợ lái xe và giao thông thông minh.
+Trong những năm gần đây, phần lớn các hệ thống hiện nay tiếp cận bài toán biển báo giao thông theo hướng phân loại ảnh truyền thống (CNN). Nhưng các phương pháp này gặp nhiều hạn chế trong thực tế như: khó mở rộng khi xuất hiện loại biển mới, cần huấn luyện lại mô hình, và hiệu quả giảm mạnh khi ảnh bị mờ, nghiêng hoặc điều kiện ánh sáng kém.
+Xuất phát từ những hạn chế trên, đề tài của nhóm em lựa chọn là hướng đến dựa trên biểu diễn đặc trưng ảnh bằng embeddings kết hợp với tìm kiếm tương đồng, thay vì phân loại cứng. Cách làm này cho phép hệ thống linh hoạt hơn, dễ mở rộng và phù hợp với điều kiện giao thông thực tế tại Việt Nam.
+2. Mục tiêu của đề tài
+Mục tiêu của đề tài là xây dựng một hệ thống có khả năng:
+•	Nhận diện và tìm kiếm biển báo giao thông Việt Nam từ ảnh đầu vào
+•	Biểu diễn mỗi biển báo dưới dạng vector đặc trưng (embedding)
+•	Xác định loại biển báo dựa trên độ tương đồng giữa các vector
+•	Cho phép mở rộng hệ thống bằng cách bổ sung dữ liệu mới mà không cần huấn luyện lại toàn bộ mô hình
+3. Đối tượng và phạm vi nghiên cứu
+3.1. Đối tượng nghiên cứu
+Các loại biển báo giao thông đường bộ tại Việt Nam
+Các phương pháp trích xuất đặc trưng ảnh 
+Kỹ thuật tìm kiếm ảnh theo nội dung
+3.2. Phạm vi nghiên cứu
+3.2.1. Đối tượng nghiên cứu
+•	Các biển báo giao thông đường bộ Việt Nam theo Quy chuẩn kỹ thuật quốc gia (QCVN 41).
+•	Các nhóm biển chính:
+o	Biển cấm
+o	Biển nguy hiểm
+o	Biển hiệu lệnh
+o	Biển chỉ dẫn
+3.2.2. Phạm vi dữ liệu
+•	Sử dụng hình ảnh biển báo giao thông Việt Nam thu thập từ:
+o	ộ dữ liệu công khai (Kaggle, Roboflow, Open Images…).
+o	Ảnh minh họa chuẩn theo QCVN 41.
+•	Phạm vi dữ liệu ban đầu:
+o	Ảnh biển báo đơn lẻ, rõ ràng, không bị che khuất.
+o	Số lượng giới hạn (ví dụ: 50–150 loại biển phổ biến).
+•	Mỗi biển báo gắn với:
+o	Tên biển
+o	Nhóm biển
+o	Ý nghĩa / mô tả ngắn gọn
+3.2.3. Phạm vi phương pháp và kỹ thuật
+•	Áp dụng tìm kiếm ảnh theo nội dung (CBIR).
+•	Sử dụng mô hình CLIP (Vision–Language Model) để:
+o	Trích xuất vector đặc trưng từ ảnh biển báo.
+o	So khớp ảnh truy vấn với ảnh trong cơ sở dữ liệu.
+•	Độ tương đồng được đo bằng cosine similarity trong không gian vector.
+•	Lưu trữ và tìm kiếm vector bằng cơ sở dữ liệu vector (ví dụ: Milvus / FAISS).
+•	Không huấn luyện lại mô hình học sâu, chỉ sử dụng mô hình pretrained.
+3.2.4. Phạm vi chức năng hệ thống
+•	Cho phép người dùng:
+o	Tải lên một ảnh biển báo giao thông.
+o	Hệ thống trả về:
+	Tên biển báo
+	Nhóm biển
+	Ý nghĩa / mô tả
+•	Hệ thống hoạt động theo mô hình:
+o	Backend API (FastAPI)
+o	Giao diện web đơn giản (ReactJS hoặc tương đương)
+3.2.5. Giới hạn nghiên cứu
+•	Đề tài không xử lý video hoặc luồng camera thời gian thực.
+•	Chưa xử lý các trường hợp phức tạp như:
+o	Nhiều biển báo trong cùng một ảnh.
+o	Biển báo bị che khuất, mờ, nghiêng mạnh.
+•	Không triển khai các mô hình phát hiện đối tượng (YOLO, SSD) trong phạm vi đề tài.
+•	Mục tiêu chính là tìm kiếm và nhận diện, không phải hệ thống hỗ trợ lái xe thông minh hoàn chỉnh.
+3.2.6. Định hướng ứng dụng
+•	Hỗ trợ học luật giao thông đường bộ.
+•	Ứng dụng trong:
+o	Giáo dục an toàn giao thông
+o	Tra cứu nhanh biển báo cho người học lái xe
+o	Nền tảng học tập trực tuyến
+4. Phương pháp và hướng tiếp cận
+Đề tài nhóm em tiếp cận theo hướng tìm kiếm ảnh dựa trên độ tương đồng, thay vì phân loại truyền thống. Quy trình xử lý chính bao gồm:
+Ảnh biển báo được cắt sẵn hoặc chứa biển báo rõ ràng để tập trung vào bài toán tìm kiếm dựa trên embedding
+Trích xuất vùng ảnh chứa biển báo
+Mã hóa ảnh biển báo thành vector embedding bằng mô hình học sâu
+Lưu trữ các vector đặc trưng vào cơ sở dữ liệu vector
+Khi có ảnh mới, hệ thống so sánh embedding của ảnh đầu vào với các embedding đã lưu để tìm ra biển báo tương đồng nhất
+5. Dữ liệu sử dụng
+Đề tài nhóm em sử dụng nguồn dữ liệu sau:
+Trên kaggle: Vietnam Traffic Sign Dataset 
+Dữ liệu từ ảnh thu thập thực tế tại địa bàn Quy Nhơn
+Dữ liệu được tiền xử lý, làm sạch và chuẩn hóa trước khi đưa vào hệ thống.
+6. Nội dung thực hiện
+Các nội dung chính của đề tài bao gồm:
+Nghiên cứu cơ sở lý thuyết về embeddings và tìm kiếm ảnh theo nội dung
+Thu thập và tiền xử lý dữ liệu biển báo giao thông
+Xây dựng mô hình trích xuất embedding cho ảnh biển báo
+Xây dựng hệ thống tìm kiếm và nhận diện biển báo dựa trên độ tương đồng
+Thực nghiệm, đánh giá độ chính xác và hiệu năng của hệ thống
+Phân tích ưu điểm, hạn chế và đề xuất hướng phát triển
+7. Kết quả mong đợi
+Hệ thống nhận diện biển báo giao thông dựa trên embeddings hoạt động ổn định
+Đạt độ chính xác cao với các biển báo phổ biến
+Thời gian truy vấn nhanh, phù hợp cho các ứng dụng thực tế
+Chứng minh được tính linh hoạt và khả năng mở rộng so với phương pháp phân loại truyền thống

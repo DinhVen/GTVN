@@ -1,0 +1,103 @@
+.app-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.title {
+  color: #000;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  border: 2px dashed #999;
+  padding: 40px 20px;
+  text-align: center;
+  background: #eee;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.preview-image {
+  max-width: 200px;
+  border: 1px solid #000;
+}
+
+.btn-search {
+  padding: 8px 16px;
+  background: #ddd;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.btn-search:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-card {
+  display: flex;
+  border: 1px solid #999;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.result-image-wrapper {
+  margin-right: 15px;
+}
+
+.result-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result-info span {
+  font-size: 14px;
+}
+
+.result-meaning {
+  font-size: 14px;
+  font-style: italic;
+  color: #444;
+}

@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+faiss-cpu
+transformers
+torch
+pandas
+Pillow
+pydantic
