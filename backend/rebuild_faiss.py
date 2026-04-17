@@ -15,7 +15,7 @@ EMBEDDINGS_PATH = os.path.join(DATA_DIR, "image_embeddings.npy")
 
 print("Loading CLIP model...")
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model_name = "openai/clip-vit-base-patch32"
+model_name = "openai/clip-vit-large-patch14"
 model = CLIPModel.from_pretrained(model_name).to(device)
 processor = CLIPProcessor.from_pretrained(model_name)
 

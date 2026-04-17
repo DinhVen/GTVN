@@ -40,7 +40,7 @@ def load_resources():
     global model, processor, faiss_index, metadata_df
     
     print("Loading CLIP model...")
-    model_name = "openai/clip-vit-base-patch32"
+    model_name = "openai/clip-vit-large-patch14"
     model = CLIPModel.from_pretrained(model_name).to(device)
     processor = CLIPProcessor.from_pretrained(model_name)
     
@@ -85,30 +85,82 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
         image_features = image_features / torch.norm(image_features, p=2, dim=-1, keepdim=True)
         query_vector = image_features.cpu().numpy()
         
-        # Search FAISS index
-        distances, indices = faiss_index.search(query_vector, top_k)
+        # VLP Re-ranking: Retrieve more candidates and re-rank with Text
+        TOP_CANDIDATES = 15
+        distances, indices = faiss_index.search(query_vector, max(top_k, TOP_CANDIDATES))
         
-        results = []
+        candidates = []
+        text_list = []
+        
         for i, idx in enumerate(indices[0]):
-            if idx == -1: continue # FAISS returns -1 for not found
-            
-            # Reconstruct metadata dict
-            # Handling potential missing values safely
+            if idx == -1: continue
             row = metadata_df.iloc[idx].fillna("").to_dict()
             
+            label = str(row.get("label", "Unknown"))
+            meaning = str(row.get("meaning", ""))
+            
+            # Text prompt for CLIP text embeddings
+            desc = f"Biển báo giao thông: {meaning}. Ký hiệu: {label}."
+            
+            candidates.append({
+                "idx": idx,
+                "visual_score": float(distances[0][i]),
+                "row": row,
+                "label": label
+            })
+            text_list.append(desc)
+            
+        if text_list:
+            # Re-ranking using Text similarity
+            text_inputs = processor(text=text_list, return_tensors="pt", padding=True, truncation=True).to(device)
+            
+            with torch.no_grad():
+                # Extract text features safely and FAST without triggering Vision branch
+                text_outputs = model.text_model(**text_inputs)
+                text_features = text_outputs.pooler_output
+                text_features = model.text_projection(text_features)
+                text_features = text_features / torch.norm(text_features, p=2, dim=-1, keepdim=True)
+                
+                # compute cosine similarity between original query image embed and text branch embeds
+                img_feat_tensor = torch.tensor(query_vector).to(device)
+                text_sims = torch.matmul(img_feat_tensor, text_features.T)[0].cpu().numpy()
+                
+            # Combine scores with weights (giving text score a solid impact)
+            for idx_c, cand in enumerate(candidates):
+                t_score = float(text_sims[idx_c])
+                cand["text_score"] = t_score
+                cand["final_score"] = cand["visual_score"] + (t_score * 0.85)
+
+            # Sort by newly computed Multi-modal score
+            candidates = sorted(candidates, key=lambda x: x["final_score"], reverse=True)
+        
+        # Deduplicate to show unique signs (fixes showing the same sign 3 times)
+        seen_labels = set()
+        results = []
+        
+        for cand in candidates:
+            if cand["label"] in seen_labels: continue
+            seen_labels.add(cand["label"])
+            
+            row = cand["row"]
             results.append({
-                "rank": i + 1,
-                "score": float(distances[0][i]),
-                "label": str(row.get("label", "Unknown")),
+                "rank": len(results) + 1,
+                "score": cand["visual_score"], # Using original visual score for UI display transparency
+                "label": cand["label"],
                 "group": str(row.get("group", "Unknown")),
                 "meaning": str(row.get("meaning", "No meaning available")),
                 "advice": str(row.get("advice", "Tuân thủ luật giao thông")),
                 "image_path": str(row.get("image_path", ""))
             })
             
+            if len(results) >= top_k:
+                break
+                
         return {"results": results}
         
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
 
 if __name__ == "__main__":
