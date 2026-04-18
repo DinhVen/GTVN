@@ -89,6 +89,25 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
         TOP_CANDIDATES = 15
         distances, indices = faiss_index.search(query_vector, max(top_k, TOP_CANDIDATES))
         
+        # OOD Check: Zero-Shot Classification using CLIP
+        # Check if the image looks more like a traffic sign or something completely different
+        ood_prompts = ["A close-up photo of a traffic sign", "A photo of a signature, text document, animal, scenery, or random object"]
+        ood_inputs = processor(text=ood_prompts, return_tensors="pt", padding=True, truncation=True).to(device)
+        with torch.no_grad():
+            ood_text_outputs = model.text_model(**ood_inputs)
+            ood_text_feats = model.text_projection(ood_text_outputs.pooler_output)
+            ood_text_feats = ood_text_feats / torch.norm(ood_text_feats, p=2, dim=-1, keepdim=True)
+            
+            # dot product
+            img_feat_tensor = torch.tensor(query_vector).to(device)
+            ood_sims = torch.matmul(img_feat_tensor, ood_text_feats.T)[0].cpu().numpy()
+            
+        print(f"OOD Sims: Traffic Sign = {ood_sims[0]}, Random = {ood_sims[1]}")
+        # If it looks more like random object than a traffic sign, reject it!
+        if ood_sims[1] > ood_sims[0]:
+            raise HTTPException(status_code=400, detail="Hình ảnh không hợp lệ! Vui lòng tải lên đúng đoạn cắt có chứa biển báo. (Hệ thống phát hiện đây không phải là biển báo)")
+        
+        
         candidates = []
         text_list = []
         
@@ -158,6 +177,8 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
                 
         return {"results": results}
         
+    except HTTPException:
+        raise
     except Exception as e:
         import traceback
         traceback.print_exc()

@@ -106,7 +106,8 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || `Error: ${response.statusText}`);
       }
 
       const data = await response.json();
