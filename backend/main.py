@@ -86,7 +86,7 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
         query_vector = image_features.cpu().numpy()
         
         # VLP Re-ranking: Retrieve more candidates and re-rank with Text
-        TOP_CANDIDATES = 15
+        TOP_CANDIDATES = 30
         distances, indices = faiss_index.search(query_vector, max(top_k, TOP_CANDIDATES))
         
         # OOD Check: Zero-Shot Classification using CLIP
@@ -119,7 +119,7 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
             meaning = str(row.get("meaning", ""))
             
             # Text prompt for CLIP text embeddings
-            desc = f"Biển báo giao thông: {meaning}. Ký hiệu: {label}."
+            desc = f"A Vietnamese traffic sign that means: {meaning}"
             
             candidates.append({
                 "idx": idx,
@@ -144,11 +144,11 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
                 img_feat_tensor = torch.tensor(query_vector).to(device)
                 text_sims = torch.matmul(img_feat_tensor, text_features.T)[0].cpu().numpy()
                 
-            # Combine scores with weights (giving text score a solid impact)
+            # Combine scores with weights (text score has strong influence)
             for idx_c, cand in enumerate(candidates):
                 t_score = float(text_sims[idx_c])
                 cand["text_score"] = t_score
-                cand["final_score"] = cand["visual_score"] + (t_score * 0.85)
+                cand["final_score"] = cand["visual_score"] + (t_score * 1.2)
 
             # Sort by newly computed Multi-modal score
             candidates = sorted(candidates, key=lambda x: x["final_score"], reverse=True)
