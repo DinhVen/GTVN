@@ -12,6 +12,7 @@ function App() {
 
   const [crop, setCrop] = useState({ unit: '%', width: 80, height: 80, x: 10, y: 10 });
   const [completedCrop, setCompletedCrop] = useState(null);
+  const [shapeMask, setShapeMask] = useState('rect'); // 'rect' | 'circle' | 'triangle'
   const imgRef = useRef(null);
 
   const fileInputRef = useRef(null);
@@ -42,6 +43,7 @@ function App() {
       // Reset crop state
       setCrop({ unit: '%', width: 80, height: 80, x: 10, y: 10 });
       setCompletedCrop(null);
+      setShapeMask('rect');
     };
     reader.readAsDataURL(file);
     setResults([]);
@@ -58,7 +60,6 @@ function App() {
   const getCroppedImgBlob = async () => {
     const image = imgRef.current;
     if (!image || !completedCrop || completedCrop.width <= 0 || completedCrop.height <= 0) {
-      // If user didn't crop properly, just return original file
       return selectedFile;
     }
 
@@ -66,21 +67,48 @@ function App() {
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
 
-    canvas.width = completedCrop.width * scaleX;
-    canvas.height = completedCrop.height * scaleY;
+    const cw = completedCrop.width * scaleX;
+    const ch = completedCrop.height * scaleY;
+    canvas.width = cw;
+    canvas.height = ch;
 
     const ctx = canvas.getContext('2d');
+
+    // Fill white background first (so masked areas are white, not transparent)
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, cw, ch);
+
+    // Apply shape mask
+    if (shapeMask === 'circle') {
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cw / 2, ch / 2, cw / 2, ch / 2, 0, 0, Math.PI * 2);
+      ctx.clip();
+    } else if (shapeMask === 'triangle') {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cw / 2, 0);         // Top center
+      ctx.lineTo(0, ch);              // Bottom left
+      ctx.lineTo(cw, ch);             // Bottom right
+      ctx.closePath();
+      ctx.clip();
+    }
+
     ctx.drawImage(
       image,
       completedCrop.x * scaleX,
       completedCrop.y * scaleY,
-      completedCrop.width * scaleX,
-      completedCrop.height * scaleY,
+      cw,
+      ch,
       0,
       0,
-      canvas.width,
-      canvas.height
+      cw,
+      ch
     );
+
+    if (shapeMask !== 'rect') {
+      ctx.restore();
+    }
 
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
@@ -119,20 +147,7 @@ function App() {
     }
   };
 
-  const getActionAdvice = (group) => {
-    switch (group?.toLowerCase()) {
-      case 'cấm':
-        return "Tuyệt đối không được thực hiện hành vi bị cấm, vi phạm sẽ bị xử phạt hành chính.";
-      case 'nguy hiểm':
-        return "Giảm tốc độ, chú ý quan sát xung quanh và chuẩn bị ứng phó với tình huống xấu.";
-      case 'hiệu lệnh':
-        return "Bắt buộc phải tuân theo hướng dẫn hoặc chỉ thị của biển báo này.";
-      case 'chỉ dẫn':
-        return "Theo dõi để lấy thông tin định hướng đường đi, giúp di chuyển thuận lợi.";
-      default:
-        return "Hãy tuân thủ luật giao thông chung.";
-    }
-  };
+
 
   const formatGroup = (group) => {
     if (!group) return "";
@@ -167,8 +182,9 @@ function App() {
           ) : (
             <div className="preview-container">
               <p style={{ marginBottom: '5px', fontSize: '13px', color: 'red' }}>
-                * Hãy kéo chọn VÙNG CHỨA BIỂN BÁO để loại bỏ nền/chữ, kết quả sẽ chính xác hơn!
+                * Kéo chọn vùng biển báo, chọn hình dạng crop phù hợp để kết quả chính xác hơn!
               </p>
+              <div style={{ position: 'relative', display: 'inline-block' }}>
               <ReactCrop
                 crop={crop}
                 onChange={c => setCrop(c)}
@@ -179,33 +195,78 @@ function App() {
                   ref={imgRef}
                   alt="Upload preview"
                   className="preview-image"
-                  onLoad={(e) => {
-                    const { width, height } = e.currentTarget;
+                  onLoad={() => {
                     setCrop({ unit: '%', width: 90, height: 90, x: 5, y: 5 });
                   }}
                   style={{ maxWidth: '100%', maxHeight: '400px' }}
                 />
               </ReactCrop>
 
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '10px' }}>
-                <button
-                  className="btn-search"
-                  onClick={handleSearch}
-                  disabled={loading}
-                  style={{ fontWeight: 'bold', background: '#e0f7fa' }}
-                >
+              {/* Shape overlay - shows visually on top of crop area */}
+              {shapeMask !== 'rect' && imgRef.current && crop.width > 0 && crop.height > 0 && (() => {
+                const img = imgRef.current;
+                const isPercent = crop.unit === '%';
+                const left = isPercent ? (crop.x / 100) * img.width : crop.x;
+                const top = isPercent ? (crop.y / 100) * img.height : crop.y;
+                const w = isPercent ? (crop.width / 100) * img.width : crop.width;
+                const h = isPercent ? (crop.height / 100) * img.height : crop.height;
+
+                return (
+                  <svg
+                    style={{
+                      position: 'absolute',
+                      left: left + 'px',
+                      top: top + 'px',
+                      width: w + 'px',
+                      height: h + 'px',
+                      pointerEvents: 'none',
+                      zIndex: 10,
+                    }}
+                    viewBox={`0 0 ${w} ${h}`}
+                  >
+                    <defs>
+                      <mask id="shapeMask">
+                        <rect width={w} height={h} fill="white" />
+                        {shapeMask === 'circle' && (
+                          <ellipse cx={w/2} cy={h/2} rx={w/2} ry={h/2} fill="black" />
+                        )}
+                        {shapeMask === 'triangle' && (
+                          <polygon points={`${w/2},0 0,${h} ${w},${h}`} fill="black" />
+                        )}
+                      </mask>
+                    </defs>
+                    {/* Dark overlay for areas OUTSIDE the shape */}
+                    <rect width={w} height={h} fill="rgba(0,0,0,0.55)" mask="url(#shapeMask)" />
+                    {/* Shape border */}
+                    {shapeMask === 'circle' && (
+                      <ellipse cx={w/2} cy={h/2} rx={w/2 - 1} ry={h/2 - 1} fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="6,4" />
+                    )}
+                    {shapeMask === 'triangle' && (
+                      <polygon points={`${w/2},1 1,${h-1} ${w-1},${h-1}`} fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="6,4" />
+                    )}
+                  </svg>
+                );
+              })()}
+              </div>
+
+              {/* Compact shape bar + action buttons in one row */}
+              <div style={{ display: 'flex', gap: '10px', marginTop: '8px', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <div className="shape-bar">
+                  <span className="shape-bar-label">Crop:</span>
+                  <button className={`shape-btn-sm ${shapeMask === 'rect' ? 'active' : ''}`} onClick={() => setShapeMask('rect')} title="Chữ nhật">
+                    <svg width="18" height="18" viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="20" fill="none" stroke="currentColor" strokeWidth="3" rx="2"/></svg>
+                  </button>
+                  <button className={`shape-btn-sm ${shapeMask === 'circle' ? 'active' : ''}`} onClick={() => setShapeMask('circle')} title="Tròn (biển cấm)">
+                    <svg width="18" height="18" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" strokeWidth="3"/></svg>
+                  </button>
+                  <button className={`shape-btn-sm ${shapeMask === 'triangle' ? 'active' : ''}`} onClick={() => setShapeMask('triangle')} title="Tam giác (biển nguy hiểm)">
+                    <svg width="18" height="18" viewBox="0 0 32 32"><polygon points="16,3 2,29 30,29" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>
+                  </button>
+                </div>
+                <button className="btn-search" onClick={handleSearch} disabled={loading} style={{ fontWeight: 'bold', background: '#e0f7fa' }}>
                   {loading ? <span className="loader">Đang tải...</span> : 'Cắt ảnh & Nhận diện'}
                 </button>
-                <button
-                  className="btn-search"
-                  onClick={() => {
-                    setPreview(null);
-                    setSelectedFile(null);
-                    setResults([]);
-                    setError('');
-                  }}
-                  disabled={loading}
-                >
+                <button className="btn-search" onClick={() => { setPreview(null); setSelectedFile(null); setResults([]); setError(''); }} disabled={loading}>
                   Làm mới
                 </button>
               </div>

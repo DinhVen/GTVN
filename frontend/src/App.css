@@ -101,3 +101,46 @@
   font-style: italic;
   color: #444;
 }
+
+/* Compact shape bar */
+.shape-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.shape-bar-label {
+  font-size: 12px;
+  color: #555;
+  font-weight: bold;
+}
+
+.shape-btn-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.15s;
+}
+
+.shape-btn-sm:hover {
+  border-color: #90caf9;
+  background: #e3f2fd;
+}
+
+.shape-btn-sm.active {
+  border-color: #1976d2;
+  background: #bbdefb;
+  color: #1565c0;
+}

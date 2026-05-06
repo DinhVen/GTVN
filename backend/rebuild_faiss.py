@@ -37,11 +37,9 @@ with torch.no_grad():
         try:
             image = Image.open(img_path).convert("RGB")
             inputs = processor(images=image, return_tensors="pt").to(device)
-            dummy_text = processor(text=["dummy"], return_tensors="pt").to(device)
-            inputs.update(dummy_text)
             
-            outputs = model(**inputs)
-            image_features = outputs.image_embeds
+            vision_outputs = model.vision_model(pixel_values=inputs["pixel_values"])
+            image_features = model.visual_projection(vision_outputs.pooler_output)
             image_features = image_features / torch.norm(image_features, p=2, dim=-1, keepdim=True)
             embeddings.append(image_features.cpu().numpy()[0])
             valid_indices.append(idx)
