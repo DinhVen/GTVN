@@ -11,8 +11,11 @@ venv/
 env/
 .env
 
-# MacOS
+# IDE
 .DS_Store
+.vscode/
 
-# Git
-.git/
+# Personal docs (not for repo)
+BAO_CAO_CONG_VIEC.txt
+BAO_CAO_DO_AN.md
+thuyetminhdetai.txt
