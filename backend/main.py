@@ -9,6 +9,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from transformers import CLIPProcessor, CLIPModel
 from PIL import Image, ImageOps
+import time
+
+# Maximize CPU parallelism for PyTorch
+torch.set_num_threads(os.cpu_count() or 4)
+torch.set_num_interop_threads(1)
 
 # --- Directional mirror pairs (label_left, label_right) ---
 # When both appear in candidates, use flip-comparison to pick the correct direction
@@ -140,9 +145,13 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
 
     # Extract features using CLIP
     try:
+        t0 = time.perf_counter()
+        
         # === STEP 1: Image Encoding (original + flipped for direction detection) ===
-        image_flipped = ImageOps.mirror(image)
-        image_inputs = processor(images=[image, image_flipped], return_tensors="pt").to(device)
+        # Pre-resize to CLIP input size (224x224) for faster processing
+        image_small = image.resize((224, 224), Image.LANCZOS)
+        image_flipped = ImageOps.mirror(image_small)
+        image_inputs = processor(images=[image_small, image_flipped], return_tensors="pt").to(device)
         
         with torch.inference_mode():
             vision_outputs = model.vision_model(pixel_values=image_inputs["pixel_values"])
@@ -244,7 +253,8 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
             
             if len(results) >= top_k:
                 break
-                
+        
+        print(f"  >> Total inference: {(time.perf_counter()-t0)*1000:.0f}ms")
         return {"results": results}
         
     except HTTPException:
