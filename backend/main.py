@@ -66,11 +66,12 @@ processor = None
 faiss_index = None
 metadata_df = None
 ood_text_feats = None  # Pre-computed OOD text embeddings
+all_text_feats = None  # Pre-computed text embeddings for ALL signs (indexed by metadata row)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 @app.on_event("startup")
 def load_resources():
-    global model, processor, faiss_index, metadata_df, ood_text_feats
+    global model, processor, faiss_index, metadata_df, ood_text_feats, all_text_feats
     
     print("Loading CLIP model...")
     model_name = "openai/clip-vit-large-patch14"
@@ -88,7 +89,7 @@ def load_resources():
         raise RuntimeError(f"Metadata file not found at {METADATA_PATH}")
     metadata_df = pd.read_csv(METADATA_PATH)
     
-    # Pre-compute OOD text embeddings (these never change, no need to recompute per request)
+    # Pre-compute OOD text embeddings
     print("Pre-computing OOD text embeddings...")
     ood_prompts = [
         "A close-up photo of a traffic sign",
@@ -99,6 +100,25 @@ def load_resources():
         ood_outputs = model.text_model(**ood_inputs)
         ood_text_feats = model.text_projection(ood_outputs.pooler_output)
         ood_text_feats = ood_text_feats / torch.norm(ood_text_feats, p=2, dim=-1, keepdim=True)
+    
+    # Pre-compute ALL text embeddings for re-ranking (biggest speed optimization)
+    print("Pre-computing text embeddings for all signs (one-time cost)...")
+    all_prompts = [f"A Vietnamese traffic sign that means: {str(row.get('meaning', ''))}" 
+                   for _, row in metadata_df.iterrows()]
+    
+    BATCH_SIZE = 64
+    text_embeds_list = []
+    with torch.inference_mode():
+        for i in range(0, len(all_prompts), BATCH_SIZE):
+            batch = all_prompts[i:i+BATCH_SIZE]
+            text_inputs = processor(text=batch, return_tensors="pt", padding=True, truncation=True).to(device)
+            text_outputs = model.text_model(**text_inputs)
+            text_features = model.text_projection(text_outputs.pooler_output)
+            text_features = text_features / torch.norm(text_features, p=2, dim=-1, keepdim=True)
+            text_embeds_list.append(text_features.cpu())
+    
+    all_text_feats = torch.cat(text_embeds_list, dim=0).to(device)  # Shape: (N, 768)
+    print(f"Pre-computed {all_text_feats.shape[0]} text embeddings!")
     
     print("All resources loaded successfully!")
 
@@ -145,15 +165,14 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
         TOP_CANDIDATES = 30
         distances, indices = faiss_index.search(query_vector, max(top_k, TOP_CANDIDATES))
         
-        # === STEP 4: Build re-ranking text prompts ===
+        # === STEP 4: Build candidates ===
         candidates = []
-        rerank_prompts = []
+        candidate_indices = []  # Track FAISS indices for text lookup
         
         for i, idx in enumerate(indices[0]):
             if idx == -1: continue
             row = metadata_df.iloc[idx].fillna("").to_dict()
             label = str(row.get("label", "Unknown"))
-            meaning = str(row.get("meaning", ""))
             
             candidates.append({
                 "idx": idx,
@@ -161,18 +180,13 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
                 "row": row,
                 "label": label
             })
-            rerank_prompts.append(f"A Vietnamese traffic sign that means: {meaning}")
+            candidate_indices.append(idx)
         
-        # === STEP 5: Text Re-ranking (single batch) ===
-        if rerank_prompts:
-            text_inputs = processor(text=rerank_prompts, return_tensors="pt", padding=True, truncation=True).to(device)
-            
-            with torch.inference_mode():
-                text_outputs = model.text_model(**text_inputs)
-                text_features = model.text_projection(text_outputs.pooler_output)
-                text_features = text_features / torch.norm(text_features, p=2, dim=-1, keepdim=True)
-                
-                text_sims = torch.matmul(img_feat_tensor, text_features.T)[0].cpu().numpy()
+        # === STEP 5: Text Re-ranking (pre-computed lookup — near instant) ===
+        if candidate_indices:
+            # Just lookup pre-computed text embeddings — no model inference needed!
+            cand_text_feats = all_text_feats[candidate_indices]  # Shape: (N, 768)
+            text_sims = torch.matmul(img_feat_tensor, cand_text_feats.T)[0].cpu().numpy()
             
             for idx_c, cand in enumerate(candidates):
                 t_score = float(text_sims[idx_c])
