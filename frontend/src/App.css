@@ -1,3 +1,4 @@
+/* Khung chứa chính — giới hạn 800px, căn giữa */
 .app-container {
   max-width: 800px;
   margin: 20px auto;
@@ -6,6 +7,7 @@
   border: 1px solid #ccc;
 }
 
+/* Tiêu đề */
 .header {
   text-align: center;
   border-bottom: 2px solid #333;
@@ -22,10 +24,12 @@
   font-size: 14px;
 }
 
+/* Vùng upload ảnh */
 .upload-section {
   margin-bottom: 20px;
 }
 
+/* Vùng kéo thả — viền nét đứt */
 .upload-box {
   border: 2px dashed #999;
   padding: 40px 20px;
@@ -34,10 +38,12 @@
   cursor: pointer;
 }
 
+/* Ẩn input file mặc định */
 .file-input {
   display: none;
 }
 
+/* Vùng xem trước ảnh */
 .preview-container {
   display: flex;
   flex-direction: column;
@@ -50,6 +56,7 @@
   border: 1px solid #000;
 }
 
+/* Nút hành động chung */
 .btn-search {
   padding: 8px 16px;
   background: #ddd;
@@ -62,12 +69,14 @@
   cursor: not-allowed;
 }
 
+/* Danh sách card kết quả */
 .cards-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Card kết quả — ảnh bên trái, text bên phải */
 .result-card {
   display: flex;
   border: 1px solid #999;
@@ -79,6 +88,7 @@
   margin-right: 15px;
 }
 
+/* Ảnh mẫu vuông 120x120 */
 .result-image {
   width: 120px;
   height: 120px;
@@ -86,6 +96,7 @@
   border: 1px solid #ccc;
 }
 
+/* Thông tin kết quả */
 .result-info {
   display: flex;
   flex-direction: column;
@@ -102,7 +113,7 @@
   color: #444;
 }
 
-/* Compact shape bar */
+/* Thanh chọn hình dạng crop */
 .shape-bar {
   display: flex;
   align-items: center;
@@ -119,6 +130,7 @@
   font-weight: bold;
 }
 
+/* Nút shape nhỏ 30x30 */
 .shape-btn-sm {
   display: flex;
   align-items: center;
@@ -139,6 +151,7 @@
   background: #e3f2fd;
 }
 
+/* Nút đang được chọn — viền xanh */
 .shape-btn-sm.active {
   border-color: #1976d2;
   background: #bbdefb;
