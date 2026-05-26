@@ -1,67 +1,273 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import './App.css';
 
+const API_BASE_URL = 'http://localhost:8000';
+const DEFAULT_CROP = { unit: '%', width: 80, height: 80, x: 10, y: 10 };
+const LOADED_IMAGE_CROP = { unit: '%', width: 90, height: 90, x: 5, y: 5 };
+const LABEL_ALIASES = {
+  'P.127_50': 'P.127',
+};
+const SHAPES = [
+  { value: 'rect', title: 'Chữ nhật', icon: RectIcon },
+  { value: 'circle', title: 'Tròn (biển cấm)', icon: CircleIcon },
+  { value: 'triangle', title: 'Tam giác (biển nguy hiểm)', icon: TriangleIcon },
+];
+function RectIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="4" y="6" width="24" height="20" fill="none" stroke="currentColor" strokeWidth="3" rx="2" />
+    </svg>
+  );
+}
+
+function CircleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" strokeWidth="3" />
+    </svg>
+  );
+}
+
+function TriangleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true">
+      <polygon points="16,3 2,29 30,29" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function getCropPixels(crop, image) {
+  const isPercent = crop.unit === '%';
+  return {
+    left: isPercent ? (crop.x / 100) * image.width : crop.x,
+    top: isPercent ? (crop.y / 100) * image.height : crop.y,
+    width: isPercent ? (crop.width / 100) * image.width : crop.width,
+    height: isPercent ? (crop.height / 100) * image.height : crop.height,
+  };
+}
+
+function applyShapeClip(ctx, shape, width, height) {
+  if (shape === 'rect') return false;
+
+  ctx.save();
+  ctx.beginPath();
+  if (shape === 'circle') {
+    ctx.ellipse(width / 2, height / 2, width / 2, height / 2, 0, 0, Math.PI * 2);
+  } else if (shape === 'triangle') {
+    ctx.moveTo(width / 2, 0);
+    ctx.lineTo(0, height);
+    ctx.lineTo(width, height);
+    ctx.closePath();
+  }
+  ctx.clip();
+  return true;
+}
+
+function formatGroup(group) {
+  if (!group) return '';
+
+  const lower = group.toLowerCase();
+  if (lower.includes('cấm')) return 'Biển Cấm';
+  if (lower.includes('hiệu lệnh')) return 'Biển Hiệu Lệnh';
+  if (lower.includes('nguy hiểm')) return 'Biển Nguy Hiểm';
+  if (lower.includes('chỉ dẫn')) return 'Biển Chỉ Dẫn';
+  return group;
+}
+
+function displayMeaning(meaning) {
+  return meaning && meaning !== 'nan' && meaning !== 'Unknown' ? meaning : 'Đang cập nhật...';
+}
+
+function displayLabel(label) {
+  return LABEL_ALIASES[label] || label;
+}
+
+function normalizeResults(rawResults) {
+  const seenLabels = new Set();
+
+  return rawResults.reduce((items, item) => {
+    const label = displayLabel(item.label);
+    if (seenLabels.has(label)) return items;
+
+    seenLabels.add(label);
+    items.push({ ...item, label });
+    return items;
+  }, []);
+}
+
+function ShapeOverlay({ crop, image, shape }) {
+  if (shape === 'rect' || !image || crop.width <= 0 || crop.height <= 0) return null;
+
+  const { left, top, width, height } = getCropPixels(crop, image);
+
+  return (
+    <svg
+      className="shape-overlay"
+      style={{ left, top, width, height }}
+      viewBox={`0 0 ${width} ${height}`}
+    >
+      <defs>
+        <mask id="cropShapeMask">
+          <rect width={width} height={height} fill="white" />
+          {shape === 'circle' && <ellipse cx={width / 2} cy={height / 2} rx={width / 2} ry={height / 2} fill="black" />}
+          {shape === 'triangle' && <polygon points={`${width / 2},0 0,${height} ${width},${height}`} fill="black" />}
+        </mask>
+      </defs>
+      <rect width={width} height={height} fill="rgba(0,0,0,0.55)" mask="url(#cropShapeMask)" />
+      {shape === 'circle' && (
+        <ellipse
+          cx={width / 2}
+          cy={height / 2}
+          rx={width / 2 - 1}
+          ry={height / 2 - 1}
+          fill="none"
+          stroke="#00e5ff"
+          strokeWidth="2"
+          strokeDasharray="6,4"
+        />
+      )}
+      {shape === 'triangle' && (
+        <polygon
+          points={`${width / 2},1 1,${height - 1} ${width - 1},${height - 1}`}
+          fill="none"
+          stroke="#00e5ff"
+          strokeWidth="2"
+          strokeDasharray="6,4"
+        />
+      )}
+    </svg>
+  );
+}
+
+function ShapeControls({ selectedShape, onChange }) {
+  return (
+    <div className="shape-bar">
+      <span className="shape-bar-label">Crop:</span>
+      {SHAPES.map(({ value, title, icon }) => (
+        <button
+          key={value}
+          className={`shape-btn-sm ${selectedShape === value ? 'active' : ''}`}
+          onClick={() => onChange(value)}
+          title={title}
+          type="button"
+        >
+          {React.createElement(icon)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function UploadBox({ fileInputRef, onClick, onFileChange }) {
+  return (
+    <div className="upload-box" onClick={onClick}>
+      <div className="upload-text">Chọn ảnh, kéo thả hoặc Nhấn Ctrl+V để dán ảnh</div>
+      <input
+        type="file"
+        className="file-input"
+        ref={fileInputRef}
+        onChange={onFileChange}
+        accept="image/*"
+      />
+    </div>
+  );
+}
+
+function ResultCard({ item }) {
+  return (
+    <div className="result-card">
+      <div className="result-image-wrapper">
+        {item.image_path ? (
+          <img
+            src={`${API_BASE_URL}/${item.image_path}`}
+            alt={item.label}
+            className="result-image"
+            onError={(event) => {
+              event.target.onerror = null;
+              event.target.src = 'https://via.placeholder.com/200?text=Loi+Anh';
+            }}
+          />
+        ) : (
+          <div className="missing-image">-</div>
+        )}
+      </div>
+      <div className="result-info">
+        <span className="result-group"><strong>Loại biển:</strong> {formatGroup(item.group)}</span>
+        <span className="result-label"><strong>Ký hiệu (Mã biển):</strong> {item.label}</span>
+        <p className="result-meaning">
+          <strong>Chức năng / Mô tả:</strong> {displayMeaning(item.meaning)}
+        </p>
+        <div className="result-advice">
+          <strong>Lời khuyên:</strong> {item.advice}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
-  // Các state chính
-  const [selectedFile, setSelectedFile] = useState(null);   // File ảnh đã chọn
-  const [preview, setPreview] = useState(null);             // URL xem trước ảnh
-  const [results, setResults] = useState([]);               // Kết quả nhận diện
-  const [loading, setLoading] = useState(false);            // Đang xử lý?
-  const [error, setError] = useState('');                   // Thông báo lỗi
-
-  // State cho crop và shape mask
-  const [crop, setCrop] = useState({ unit: '%', width: 80, height: 80, x: 10, y: 10 });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [crop, setCrop] = useState(DEFAULT_CROP);
   const [completedCrop, setCompletedCrop] = useState(null);
-  const [shapeMask, setShapeMask] = useState('rect');       // 'rect' | 'circle' | 'triangle'
-  const imgRef = useRef(null);                              // Tham chiếu tới thẻ img
+  const [shapeMask, setShapeMask] = useState('rect');
 
+  const imgRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  // Lắng nghe Ctrl+V — nếu có ảnh trong clipboard thì xử lý
-  useEffect(() => {
-    const handlePaste = (e) => {
-      if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length > 0) {
-        const file = e.clipboardData.files[0];
-        if (file.type.startsWith('image/')) {
-          processFile(file);
-        }
-      }
-    };
-    window.addEventListener('paste', handlePaste);
-    return () => window.removeEventListener('paste', handlePaste);
-  }, []);
-
-  // Click vào vùng upload → mở hộp thoại chọn file
-  const handleBoxClick = () => {
-    fileInputRef.current.click();
+  const resetCropState = () => {
+    setCrop(DEFAULT_CROP);
+    setCompletedCrop(null);
+    setShapeMask('rect');
   };
 
-  // Xử lý file ảnh: đọc → hiện preview → reset crop
-  const processFile = (file) => {
+  const resetSession = () => {
+    setSelectedFile(null);
+    setPreview(null);
+    setResults([]);
+    setError('');
+    resetCropState();
+  };
+
+  const processFile = useCallback((file) => {
     setSelectedFile(file);
+    setResults([]);
+    setError('');
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result);
-      setCrop({ unit: '%', width: 80, height: 80, x: 10, y: 10 });
-      setCompletedCrop(null);
-      setShapeMask('rect');
+      resetCropState();
     };
     reader.readAsDataURL(file);
-    setResults([]);
-    setError('');
+  }, []);
+
+  useEffect(() => {
+    const handlePaste = (event) => {
+      const file = event.clipboardData?.files?.[0];
+      if (file?.type.startsWith('image/')) {
+        processFile(file);
+      }
+    };
+
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, [processFile]);
+
+  const handleBoxClick = () => {
+    fileInputRef.current?.click();
   };
 
-  // Khi user chọn file từ hộp thoại
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      processFile(file);
-    }
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) processFile(file);
   };
 
-  // Cắt ảnh theo vùng crop + shape mask → trả về blob JPEG
   const getCroppedImgBlob = async () => {
     const image = imgRef.current;
     if (!image || !completedCrop || completedCrop.width <= 0 || completedCrop.height <= 0) {
@@ -71,58 +277,36 @@ function App() {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
+    const cropWidth = completedCrop.width * scaleX;
+    const cropHeight = completedCrop.height * scaleY;
 
-    const cw = completedCrop.width * scaleX;
-    const ch = completedCrop.height * scaleY;
-    canvas.width = cw;
-    canvas.height = ch;
+    canvas.width = cropWidth;
+    canvas.height = cropHeight;
 
     const ctx = canvas.getContext('2d');
-
-    // Tô nền trắng (vùng ngoài shape sẽ là trắng, không trong suốt)
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, cw, ch);
+    ctx.fillRect(0, 0, cropWidth, cropHeight);
 
-    // Nếu chọn hình tròn → clip canvas theo elip
-    if (shapeMask === 'circle') {
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(cw / 2, ch / 2, cw / 2, ch / 2, 0, 0, Math.PI * 2);
-      ctx.clip();
-    // Nếu chọn tam giác → clip theo 3 đỉnh
-    } else if (shapeMask === 'triangle') {
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(cw / 2, 0);
-      ctx.lineTo(0, ch);
-      ctx.lineTo(cw, ch);
-      ctx.closePath();
-      ctx.clip();
-    }
-
-    // Vẽ phần ảnh đã crop vào canvas
+    const clipped = applyShapeClip(ctx, shapeMask, cropWidth, cropHeight);
     ctx.drawImage(
       image,
       completedCrop.x * scaleX,
       completedCrop.y * scaleY,
-      cw, ch,
-      0, 0,
-      cw, ch
+      cropWidth,
+      cropHeight,
+      0,
+      0,
+      cropWidth,
+      cropHeight,
     );
 
-    if (shapeMask !== 'rect') {
-      ctx.restore();
-    }
+    if (clipped) ctx.restore();
 
-    // Xuất canvas ra blob JPEG để gửi API
     return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, 'image/jpeg');
+      canvas.toBlob((blob) => resolve(blob), 'image/jpeg');
     });
   };
 
-  // Nhấn "Nhận diện" → crop ảnh → gửi lên backend → nhận kết quả
   const handleSearch = async () => {
     if (!preview) return;
 
@@ -132,9 +316,9 @@ function App() {
     try {
       const finalBlob = await getCroppedImgBlob();
       const formData = new FormData();
-      formData.append('file', finalBlob, "cropped_image.jpg");
+      formData.append('file', finalBlob, 'cropped_image.jpg');
 
-      const response = await fetch('http://localhost:8000/search', {
+      const response = await fetch(`${API_BASE_URL}/search`, {
         method: 'POST',
         body: formData,
       });
@@ -145,23 +329,12 @@ function App() {
       }
 
       const data = await response.json();
-      setResults(data.results || []);
+      setResults(normalizeResults(data.results || []));
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
-
-  // Chuyển tên nhóm biển sang tiếng Việt gọn
-  const formatGroup = (group) => {
-    if (!group) return "";
-    const lower = group.toLowerCase();
-    if (lower.includes('cấm')) return "Biển Cấm";
-    if (lower.includes('hiệu lệnh')) return "Biển Hiệu Lệnh";
-    if (lower.includes('nguy hiểm')) return "Biển Nguy Hiểm";
-    if (lower.includes('chỉ dẫn')) return "Biển Chỉ Dẫn";
-    return group;
   };
 
   return (
@@ -173,113 +346,40 @@ function App() {
 
       <main>
         <div className="upload-section">
-          {/* Chưa có ảnh → hiện vùng upload */}
           {!preview ? (
-            <div className="upload-box" onClick={handleBoxClick}>
-              <div className="upload-text">Chọn ảnh, kéo thả hoặc Nhấn Ctrl+V để dán ảnh</div>
-              <input
-                type="file"
-                className="file-input"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                accept="image/*"
-              />
-            </div>
+            <UploadBox
+              fileInputRef={fileInputRef}
+              onClick={handleBoxClick}
+              onFileChange={handleFileChange}
+            />
           ) : (
             <div className="preview-container">
-              <p style={{ marginBottom: '5px', fontSize: '13px', color: 'red' }}>
+              <p className="crop-hint">
                 * Kéo chọn vùng biển báo, chọn hình dạng crop phù hợp để kết quả chính xác hơn!
               </p>
-              <div style={{ position: 'relative', display: 'inline-block' }}>
-              {/* Vùng crop ảnh */}
-              <ReactCrop
-                crop={crop}
-                onChange={c => setCrop(c)}
-                onComplete={c => setCompletedCrop(c)}
-              >
-                <img
-                  src={preview}
-                  ref={imgRef}
-                  alt="Upload preview"
-                  className="preview-image"
-                  onLoad={() => {
-                    setCrop({ unit: '%', width: 90, height: 90, x: 5, y: 5 });
-                  }}
-                  style={{ maxWidth: '100%', maxHeight: '400px' }}
-                />
-              </ReactCrop>
-
-              {/* Vẽ hình chồng (overlay) lên vùng crop khi chọn tròn/tam giác */}
-              {shapeMask !== 'rect' && imgRef.current && crop.width > 0 && crop.height > 0 && (() => {
-                const img = imgRef.current;
-                const isPercent = crop.unit === '%';
-                const left = isPercent ? (crop.x / 100) * img.width : crop.x;
-                const top = isPercent ? (crop.y / 100) * img.height : crop.y;
-                const w = isPercent ? (crop.width / 100) * img.width : crop.width;
-                const h = isPercent ? (crop.height / 100) * img.height : crop.height;
-
-                return (
-                  <svg
-                    style={{
-                      position: 'absolute',
-                      left: left + 'px',
-                      top: top + 'px',
-                      width: w + 'px',
-                      height: h + 'px',
-                      pointerEvents: 'none',
-                      zIndex: 10,
-                    }}
-                    viewBox={`0 0 ${w} ${h}`}
-                  >
-                    <defs>
-                      <mask id="shapeMask">
-                        <rect width={w} height={h} fill="white" />
-                        {/* Vùng đen = phần giữ lại (trong shape) */}
-                        {shapeMask === 'circle' && (
-                          <ellipse cx={w/2} cy={h/2} rx={w/2} ry={h/2} fill="black" />
-                        )}
-                        {shapeMask === 'triangle' && (
-                          <polygon points={`${w/2},0 0,${h} ${w},${h}`} fill="black" />
-                        )}
-                      </mask>
-                    </defs>
-                    {/* Phần tối = vùng sẽ bị loại bỏ */}
-                    <rect width={w} height={h} fill="rgba(0,0,0,0.55)" mask="url(#shapeMask)" />
-                    {/* Viền nét đứt = ranh giới shape */}
-                    {shapeMask === 'circle' && (
-                      <ellipse cx={w/2} cy={h/2} rx={w/2 - 1} ry={h/2 - 1} fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="6,4" />
-                    )}
-                    {shapeMask === 'triangle' && (
-                      <polygon points={`${w/2},1 1,${h-1} ${w-1},${h-1}`} fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="6,4" />
-                    )}
-                  </svg>
-                );
-              })()}
+              <div className="crop-stage">
+                <ReactCrop
+                  crop={crop}
+                  onChange={(nextCrop) => setCrop(nextCrop)}
+                  onComplete={(nextCrop) => setCompletedCrop(nextCrop)}
+                >
+                  <img
+                    src={preview}
+                    ref={imgRef}
+                    alt="Upload preview"
+                    className="preview-image"
+                    onLoad={() => setCrop(LOADED_IMAGE_CROP)}
+                  />
+                </ReactCrop>
+                <ShapeOverlay crop={crop} image={imgRef.current} shape={shapeMask} />
               </div>
 
-              {/* Thanh chọn shape + nút hành động */}
-              <div style={{ display: 'flex', gap: '10px', marginTop: '8px', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <div className="shape-bar">
-                  <span className="shape-bar-label">Crop:</span>
-                  {/* Nút chữ nhật */}
-                  <button className={`shape-btn-sm ${shapeMask === 'rect' ? 'active' : ''}`} onClick={() => setShapeMask('rect')} title="Chữ nhật">
-                    <svg width="18" height="18" viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="20" fill="none" stroke="currentColor" strokeWidth="3" rx="2"/></svg>
-                  </button>
-                  {/* Nút tròn (biển cấm) */}
-                  <button className={`shape-btn-sm ${shapeMask === 'circle' ? 'active' : ''}`} onClick={() => setShapeMask('circle')} title="Tròn (biển cấm)">
-                    <svg width="18" height="18" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" strokeWidth="3"/></svg>
-                  </button>
-                  {/* Nút tam giác (biển nguy hiểm) */}
-                  <button className={`shape-btn-sm ${shapeMask === 'triangle' ? 'active' : ''}`} onClick={() => setShapeMask('triangle')} title="Tam giác (biển nguy hiểm)">
-                    <svg width="18" height="18" viewBox="0 0 32 32"><polygon points="16,3 2,29 30,29" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>
-                  </button>
-                </div>
-                {/* Nút nhận diện */}
-                <button className="btn-search" onClick={handleSearch} disabled={loading} style={{ fontWeight: 'bold', background: '#e0f7fa' }}>
+              <div className="preview-actions">
+                <ShapeControls selectedShape={shapeMask} onChange={setShapeMask} />
+                <button className="btn-search btn-primary" onClick={handleSearch} disabled={loading} type="button">
                   {loading ? <span className="loader">Đang tải...</span> : 'Cắt ảnh & Nhận diện'}
                 </button>
-                {/* Nút làm mới */}
-                <button className="btn-search" onClick={() => { setPreview(null); setSelectedFile(null); setResults([]); setError(''); }} disabled={loading}>
+                <button className="btn-search" onClick={resetSession} disabled={loading} type="button">
                   Làm mới
                 </button>
               </div>
@@ -287,45 +387,14 @@ function App() {
           )}
         </div>
 
-        {/* Hiện lỗi nếu có */}
-        {error && <div style={{ color: '#ff4d4f', marginTop: '1rem' }}>{error}</div>}
+        {error && <div className="error-message">{error}</div>}
 
-        {/* Hiện kết quả nhận diện */}
         {results.length > 0 && (
           <section className="results-section">
             <h2 className="results-title">Kết quả tương đồng nhất</h2>
             <div className="cards-container">
-              {results.map((item, idx) => (
-                <div key={idx} className="result-card">
-                  {/* Ảnh biển mẫu */}
-                  <div className="result-image-wrapper">
-                    {item.image_path ? (
-                      <img
-                        src={`http://localhost:8000/${item.image_path}`}
-                        alt={item.label}
-                        className="result-image"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "https://via.placeholder.com/200?text=Loi+Anh";
-                        }}
-                      />
-                    ) : (
-                      <div style={{ color: '#64748b' }}>-</div>
-                    )}
-                  </div>
-                  {/* Thông tin kết quả */}
-                  <div className="result-info">
-                    <span className="result-score" style={{ color: 'green', fontWeight: 'bold', marginBottom: '5px', display: 'block' }}>Độ tương đồng: {(item.score * 100).toFixed(1)}%</span>
-                    <span className="result-group"><strong>Loại biển:</strong> {formatGroup(item.group)}</span>
-                    <span className="result-label"><strong>Ký hiệu (Mã biển):</strong> {item.label}</span>
-                    <p className="result-meaning" style={{ marginTop: '5px', marginBottom: '5px' }}>
-                      <strong>Chức năng / Mô tả:</strong> {item.meaning && item.meaning !== "nan" && item.meaning !== "Unknown" ? item.meaning : "Đang cập nhật..."}
-                    </p>
-                    <div style={{ background: '#fffee6', padding: '5px', borderRadius: '4px', marginTop: '5px', borderLeft: '3px solid #ffc107', fontSize: '13px' }}>
-                      <strong>Lời khuyên:</strong> {item.advice}
-                    </div>
-                  </div>
-                </div>
+              {results.map((item) => (
+                <ResultCard key={`${item.rank}-${item.label}`} item={item} />
               ))}
             </div>
           </section>

@@ -1,4 +1,4 @@
-image_path,group,group_source,label,meaning,class_id,advice
+﻿image_path,group,group_source,label,meaning,class_id,advice
 dataset_aug/Information Signs/I.401/1.png,chỉ dẫn,Information Signs,I.401,Bắt đầu đường ưu tiên,0.0,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.
 dataset_aug/Information Signs/I.401/1_blur.png,chỉ dẫn,Information Signs,I.401,Bắt đầu đường ưu tiên,0.0,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.
 dataset_aug/Information Signs/I.401/1_bright.png,chỉ dẫn,Information Signs,I.401,Bắt đầu đường ưu tiên,0.0,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.

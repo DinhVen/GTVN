@@ -1,72 +1,85 @@
 import os
-import pandas as pd
-import numpy as np
+
 import faiss
+import numpy as np
+import pandas as pd
 import torch
-from transformers import CLIPProcessor, CLIPModel
 from PIL import Image
 from tqdm import tqdm
+from transformers import CLIPModel, CLIPProcessor
 
-# Đường dẫn file dữ liệu
+
+MODEL_NAME = "openai/clip-vit-large-patch14"
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 METADATA_PATH = os.path.join(DATA_DIR, "metadata.csv")
 FAISS_INDEX_PATH = os.path.join(DATA_DIR, "faiss_index.faiss")
 EMBEDDINGS_PATH = os.path.join(DATA_DIR, "image_embeddings.npy")
 
-# Load mô hình CLIP
-print("Loading CLIP model...")
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model_name = "openai/clip-vit-large-patch14"
-model = CLIPModel.from_pretrained(model_name).to(device)
-processor = CLIPProcessor.from_pretrained(model_name)
 
-# Đọc bảng metadata (danh sách ảnh mẫu)
-df = pd.read_csv(METADATA_PATH)
-embeddings = []
+def normalize(features: torch.Tensor) -> torch.Tensor:
+    return features / torch.norm(features, p=2, dim=-1, keepdim=True)
 
-# Duyệt từng ảnh, encode thành vector 768 chiều bằng CLIP
-print("Extracting features (This might take a few minutes)...")
-model.eval()
 
-valid_indices = []
+def encode_image(image_path: str, model: CLIPModel, processor: CLIPProcessor, device: str) -> np.ndarray:
+    image = Image.open(image_path).convert("RGB")
+    inputs = processor(images=image, return_tensors="pt").to(device)
 
-with torch.no_grad():
+    with torch.inference_mode():
+        outputs = model.vision_model(pixel_values=inputs["pixel_values"])
+        features = model.visual_projection(outputs.pooler_output)
+        return normalize(features).cpu().numpy()[0]
+
+
+def build_embeddings(df: pd.DataFrame, model: CLIPModel, processor: CLIPProcessor, device: str):
+    embeddings = []
+    valid_indices = []
+
     for idx, row in tqdm(df.iterrows(), total=len(df)):
-        img_path = os.path.join(BASE_DIR, str(row['image_path']))
-        if not os.path.exists(img_path):
-            print(f"File not found: {img_path}")
+        image_path = os.path.join(BASE_DIR, str(row["image_path"]))
+        if not os.path.exists(image_path):
+            print(f"File not found: {image_path}")
             continue
-            
+
         try:
-            # Mở ảnh → đưa qua CLIP → lấy vector đặc trưng 768 chiều
-            image = Image.open(img_path).convert("RGB")
-            inputs = processor(images=image, return_tensors="pt").to(device)
-            
-            vision_outputs = model.vision_model(pixel_values=inputs["pixel_values"])
-            image_features = model.visual_projection(vision_outputs.pooler_output)
-            # Chuẩn hóa L2 để dùng cosine similarity
-            image_features = image_features / torch.norm(image_features, p=2, dim=-1, keepdim=True)
-            embeddings.append(image_features.cpu().numpy()[0])
+            embeddings.append(encode_image(image_path, model, processor, device))
             valid_indices.append(idx)
-        except Exception as e:
-            print(f"Error reading {img_path}: {e}")
+        except Exception as exc:
+            print(f"Error reading {image_path}: {exc}")
 
-embeddings = np.array(embeddings).astype('float32')
+    return np.array(embeddings).astype("float32"), valid_indices
 
-print(f"Extracted shape: {embeddings.shape}")
-# Lưu embeddings ra file backup
-np.save(EMBEDDINGS_PATH, embeddings)
 
-# Cập nhật metadata chỉ giữ các ảnh hợp lệ
-new_df = df.iloc[valid_indices].reset_index(drop=True)
-new_df.to_csv(METADATA_PATH, index=False)
+def save_faiss_index(embeddings: np.ndarray) -> None:
+    index = faiss.IndexFlatIP(embeddings.shape[1])
+    index.add(embeddings)
+    faiss.write_index(index, FAISS_INDEX_PATH)
+    print("Saved newly created FAISS generic index with Dimension", embeddings.shape[1])
 
-# Tạo FAISS index — Inner Product trên vector đã normalize = Cosine Similarity
-dim = embeddings.shape[1]
-index = faiss.IndexFlatIP(dim)
-index.add(embeddings)
 
-# Lưu FAISS index ra file (~15MB)
-faiss.write_index(index, FAISS_INDEX_PATH)
-print("Saved newly created FAISS generic index with Dimension", dim)
+def main() -> None:
+    print("Loading CLIP model...")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = CLIPModel.from_pretrained(MODEL_NAME).to(device)
+    processor = CLIPProcessor.from_pretrained(MODEL_NAME)
+    model.eval()
+
+    df = pd.read_csv(METADATA_PATH)
+
+    print("Extracting features (This might take a few minutes)...")
+    embeddings, valid_indices = build_embeddings(df, model, processor, device)
+    if len(embeddings) == 0:
+        raise RuntimeError("No valid image embeddings were generated")
+
+    print(f"Extracted shape: {embeddings.shape}")
+    np.save(EMBEDDINGS_PATH, embeddings)
+
+    cleaned_df = df.iloc[valid_indices].reset_index(drop=True)
+    cleaned_df.to_csv(METADATA_PATH, index=False)
+
+    save_faiss_index(embeddings)
+
+
+if __name__ == "__main__":
+    main()
