@@ -137,6 +137,12 @@
   font-size: 14px;
 }
 
+.result-score {
+  color: #0a7a28;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 .result-meaning {
   margin-top: 5px;
   margin-bottom: 5px;

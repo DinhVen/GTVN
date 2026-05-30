@@ -73,6 +73,7 @@ function formatGroup(group) {
   if (lower.includes('hiệu lệnh')) return 'Biển Hiệu Lệnh';
   if (lower.includes('nguy hiểm')) return 'Biển Nguy Hiểm';
   if (lower.includes('chỉ dẫn')) return 'Biển Chỉ Dẫn';
+  if (lower.includes('phụ')) return 'Biển Phụ';
   return group;
 }
 
@@ -194,6 +195,7 @@ function ResultCard({ item }) {
         )}
       </div>
       <div className="result-info">
+        <span className="result-score">Độ tương đồng: {(item.score * 100).toFixed(1)}%</span>
         <span className="result-group"><strong>Loại biển:</strong> {formatGroup(item.group)}</span>
         <span className="result-label"><strong>Ký hiệu (Mã biển):</strong> {item.label}</span>
         <p className="result-meaning">

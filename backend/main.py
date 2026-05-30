@@ -16,9 +16,9 @@ from transformers import CLIPModel, CLIPProcessor
 MODEL_NAME = "openai/clip-vit-large-patch14"
 IMAGE_SIZE = (224, 224)
 TEXT_BATCH_SIZE = 64
-TOP_CANDIDATES = 30
+TOP_CANDIDATES = 50
 TEXT_SCORE_WEIGHT = 1.8
-DISPLAY_SCORE_DENOMINATOR = 2.8
+DISPLAY_SCORE_DENOMINATOR = 1.6
 MIRROR_WRONG_DIRECTION_PENALTY = 0.30
 MIRROR_CORRECT_DIRECTION_BONUS = 0.10
 
@@ -87,7 +87,6 @@ def display_label(label: str) -> str:
 
 
 def display_image_path(image_path: str) -> str:
-    # Ưu tiên ảnh gốc để frontend hiển thị đẹp hơn.
     if not image_path:
         return ""
 
@@ -131,16 +130,16 @@ def encode_images(images: list[Image.Image]) -> torch.Tensor:
 
 
 def ensure_resources_loaded() -> None:
-    # Kiểm tra tài nguyên đã sẵn sàng.
+    # Kiểm tra server đã load xong chưa.
     resources = (model, processor, faiss_index, metadata_df, ood_text_feats, all_text_feats)
     if any(resource is None for resource in resources):
-        raise HTTPException(status_code=503, detail="Server resources are still loading")
+        raise HTTPException(status_code=503, detail="Server vẫn đang tải")
 
 
 async def read_uploaded_image(file: UploadFile) -> Image.Image:
     # Đọc ảnh upload.
     if file.content_type is None or not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="Uploaded file must be an image")
+        raise HTTPException(status_code=400, detail="Tệp tải lên phải là hình ảnh(định dạng JPG, PNG, JPEG)")
 
     try:
         contents = await file.read()
@@ -298,11 +297,24 @@ def load_resources():
     print("Pre-computing OOD text embeddings...")
     ood_text_feats = encode_texts(OOD_PROMPTS)
 
+    # Ánh xạ nhóm biển → mô tả hình dạng + màu sắc để CLIP phân biệt tốt hơn
+    GROUP_DESC = {
+        "cấm": "a red circular prohibitory",
+        "biển cấm": "a red circular prohibitory",
+        "nguy hiểm": "a yellow triangular warning",
+        "hiệu lệnh": "a blue circular mandatory",
+        "chỉ dẫn": "a blue rectangular information",
+        "biển phụ": "a supplementary",
+    }
+
     print("Pre-computing text embeddings for all signs...")
-    prompts = [
-        f"A Vietnamese traffic sign that means: {str(row.get('meaning', ''))}"
-        for _, row in metadata_df.iterrows()
-    ]
+    prompts = []
+    for _, row in metadata_df.iterrows():
+        meaning = str(row.get('meaning', ''))
+        group = str(row.get('group', '')).lower().strip()
+        group_desc = GROUP_DESC.get(group, "a Vietnamese traffic")
+        prompts.append(f"A photo of {group_desc} sign that means: {meaning}")
+
     all_text_feats = encode_texts(prompts)
     print(f"Pre-computed {all_text_feats.shape[0]} text embeddings!")
     print("All resources loaded successfully!")
