@@ -182,7 +182,7 @@ function ResultCard({ item }) {
       <div className="result-image-wrapper">
         {item.image_path ? (
           <img
-            src={`${API_BASE_URL}/${item.image_path}`}
+            src={`${API_BASE_URL}/${encodeURI(item.image_path)}`}
             alt={item.label}
             className="result-image"
             onError={(event) => {

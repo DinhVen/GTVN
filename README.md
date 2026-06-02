@@ -1,58 +1,255 @@
-# Nhận diện Biển Báo Giao Thông Việt Nam bằng Embeddings
+# Nhận diện biển báo giao thông Việt Nam bằng CLIP Embeddings và FAISS
 
-Dự án sử dụng phương pháp Content-Based Image Retrieval (CBIR) để nhận diện biển báo giao thông đường bộ Việt Nam (theo QCVN 41), tận dụng sức mạnh của mô hình Vision-Language CLIP thay vì thuật toán phân loại CNN truyền thống.
+Dự án xây dựng hệ thống nhận diện biển báo giao thông đường bộ ở Việt Nam từ ảnh đầu vào. Hệ thống tiếp cận bài toán theo hướng tìm kiếm ảnh tương đồng dựa trên vector embedding, thay vì huấn luyện một mô hình phân loại ảnh từ đầu.
 
-## Tính năng Nổi bật & Đóng góp Chính
+Pipeline chính:
 
-1. Nhận diện Không cần Huấn luyện lại (Zero-shot Embedding):
-Hệ thống mã hóa ảnh biển báo thành các vector đặc trưng (768 chiều) thông qua kiến trúc mô hình openai/clip-vit-large-patch14. Bước tìm kiếm và truy vấn được thực hiện cực nhanh qua cơ sở dữ liệu lõi FAISS (Facebook AI Similarity Search) bằng phép đo Cosine. Cho phép bổ sung hàng loạt biển báo mới cực kỳ linh hoạt.
+```text
+Ảnh người dùng -> FastAPI Backend -> CLIP Embedding -> OOD Check
+               -> FAISS Search -> Text Re-ranking -> Mirror Fix
+               -> JSON Response -> ReactJS Frontend
+```
 
-2. Thuật toán Multi-modal Re-ranking (Tái xếp hạng kép cả Hình và Chữ):
-Việc dùng thuật toán này khắc phục hoàn toàn khuyết điểm "Mù phương hướng" (ví dụ: nhầm lẫn giữa mũi tên Rẽ Trái và Rẽ Phải) tồn đọng ở mô hình suy luận Zero-shot. Backend sẽ tìm Top 15 biển có hình dạng giống nhất, sau đó đem Tên ý nghĩa của 15 biển báo này gọi qua não bộ Ngôn ngữ (Text Encoder) của CLIP để chấm điểm ngược lại với Hình ảnh truy vấn ban đầu. Độ dự phóng rủi ro sai hướng bị triệt tiêu hoàn toàn nhờ sự áp chế sai số của phần Ngôn ngữ.
+## 1. Công nghệ sử dụng
 
-3. Lọc Trùng Lặp thông minh (Deduplicator):
-Hệ thống tối ưu tự động gom nhóm để đảm bảo hiện đúng 3 loại biển báo khác nhau hoàn toàn trên kết quả Frontend, tránh nhiễu thông tin cho người dùng đầu cuối.
+- **CLIP**: dùng model `openai/clip-vit-large-patch14` để encode ảnh và text thành vector embedding 768 chiều.
+- **FAISS**: tìm kiếm vector ảnh mẫu gần nhất với vector ảnh đầu vào.
+- **FastAPI**: xây dựng backend API, endpoint chính là `/search`.
+- **ReactJS + Vite**: xây dựng giao diện upload/crop ảnh và hiển thị kết quả.
+- **PIL / Pillow**: đọc ảnh, chuyển RGB, resize ảnh.
+- **PyTorch**: chạy mô hình CLIP và tính toán tensor.
+- **Pandas / NumPy**: xử lý metadata và embedding.
 
-4. Xử lý nhiễu bằng Giao diện Tương tác:
-Giao diện cung cấp công cụ tự động cắt cúp linh hoạt, giúp người dùng loại bỏ các mảng rừng cây/cột sáng thừa thải mà không cần phải triển khai bất kỳ mô hình Nhận diện Vật thể (Object Detection - YOLO) nào. 
+## 2. Cấu trúc thư mục chính
 
-## Yêu cầu Hệ thống
+```text
+GTVN/
+├── backend/
+│   ├── main.py              # FastAPI backend
+│   ├── rebuild_faiss.py     # Tạo image_embeddings.npy và faiss_index.faiss
+│   ├── evaluate.py          # Đánh giá Top-1, Top-2, Top-3 accuracy
+│   └── requirements.txt     # Thư viện Python
+├── data/
+│   ├── metadata.csv         # Metadata của ảnh biển báo
+│   ├── image_embeddings.npy # Vector ảnh mẫu
+│   └── faiss_index.faiss    # Chỉ mục FAISS
+├── dataset_aug/             # Tập ảnh mẫu sau tăng cường dữ liệu
+├── data_test/               # Tập ảnh test để đánh giá
+└── frontend/
+    ├── src/
+    ├── package.json
+    └── vite.config.js
+```
 
-- Python 3.8 trở lên (Khuyến nghị 3.9 tới 3.10)
-- Node.js 16+ và npm
-- Git
+## 3. Dữ liệu
 
-## Hướng dẫn Cài đặt & Khởi động Dự án
+Dữ liệu được xây dựng dựa trên hệ thống biển báo giao thông đường bộ Việt Nam theo **QCVN 41**. QCVN 41 được dùng làm căn cứ để xác định mã biển, nhóm biển, ý nghĩa và chức năng của từng biển báo.
 
-Bước 1: Clone project về máy
+Thư mục `dataset_aug` gồm 5 nhóm biển:
+
+```text
+dataset_aug/
+├── Information Signs
+├── Mandatory Signs
+├── Prohibitory Signs
+├── Supplementary Signs
+└── Warning Signs
+```
+
+File `data/metadata.csv` quản lý thông tin của từng ảnh, gồm các trường chính:
+
+```text
+image_path, group, group_source, label, meaning, class_id, advice
+```
+
+## 4. Yêu cầu hệ thống
+
+### Backend
+
+- Python 3.10 trở lên khuyến nghị.
+- Có thể chạy bằng CPU, nhưng lần đầu load CLIP sẽ hơi chậm.
+- Nếu có GPU CUDA, PyTorch có thể tận dụng GPU để xử lý nhanh hơn.
+
+### Frontend
+
+- Node.js 18 trở lên khuyến nghị.
+- npm đi kèm Node.js.
+
+## 5. Triển khai project
+
+### Bước 1: Clone project
+
+Windows và macOS / MacBook dùng chung lệnh:
+
+```bash
 git clone https://github.com/DinhVen/GTVN.git
 cd GTVN
+```
 
-Bước 2: Cài đặt Backend (Python FastAPI)
-1. Di chuyển vào thư mục backend:
-   cd backend
-2. Tạo và kích hoạt môi trường ảo:
-   python -m venv venv
-   - Trên Windows: venv\Scripts\activate
-   - Trên Linux/Mac: source venv/bin/activate
-3. Cài đặt các thư viện cần thiết:
-   pip install -r requirements.txt
-4. Khởi tạo Cơ sở Dữ liệu Vector lõi (FAISS Index):
-   python rebuild_faiss.py
-   (Lưu ý: Quá trình sẽ cần ít phút để tính toán vector 768-D cho hơn 3400 tấm ảnh mẫu)
-5. Chạy backend server:
-   python main.py
-   (Backend chạy tại: http://localhost:8000)
+### Bước 2: Cài backend
 
-Bước 3: Cài đặt Frontend (React + Vite)
-1. Mở thêm 1 terminal thứ 2 và vào folder frontend:
-   cd frontend
-2. Cài đặt thư viện Node:
-   npm install
-3. Chạy giao diện Local:
-   npm run dev
-   (Frontend chạy tại: http://localhost:5173)
+Windows:
 
-Bước 4: Trải nghiệm
-Mở trình duyệt web truy cập http://localhost:5173 
-Bấm nút chọn ảnh, hoặc dán ảnh (Ctrl+V) trực tiếp vào màn hình. Dùng chuột căn chỉnh khung viền crop và ấn Nhận diện.
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+macOS / MacBook:
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Bước 3: Tạo lại FAISS index nếu cần
+
+Nếu đã có sẵn `data/faiss_index.faiss` và `data/image_embeddings.npy` thì có thể bỏ qua bước này.
+
+Windows:
+
+```bash
+python rebuild_faiss.py
+```
+
+macOS / MacBook:
+
+```bash
+python3 rebuild_faiss.py
+```
+
+### Bước 4: Chạy backend
+
+Windows:
+
+```bash
+python main.py
+```
+
+macOS / MacBook:
+
+```bash
+python3 main.py
+```
+
+Backend chạy tại:
+
+```text
+http://localhost:8000
+```
+
+API nhận diện:
+
+```text
+POST http://localhost:8000/search
+```
+
+### Bước 5: Cài và chạy frontend
+
+Mở terminal mới tại thư mục gốc project.
+
+Windows:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+macOS / MacBook:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend chạy tại:
+
+```text
+http://localhost:5173
+```
+
+## 6. Cách sử dụng hệ thống
+
+1. Mở trình duyệt và truy cập:
+
+```text
+http://localhost:5173
+```
+
+2. Chọn ảnh hoặc dán ảnh vào giao diện.
+3. Crop vùng có chứa biển báo.
+4. Bấm **Cắt ảnh & Nhận diện**.
+5. Hệ thống hiển thị các kết quả tương đồng nhất, gồm:
+   - Ảnh mẫu.
+   - Độ tương đồng.
+   - Loại biển.
+   - Mã biển.
+   - Ý nghĩa.
+   - Lời khuyên.
+
+## 7. Chạy đánh giá
+
+Trước khi đánh giá, cần chạy backend ở port `8000`.
+
+Windows:
+
+```bash
+cd backend
+venv\Scripts\activate
+python evaluate.py
+```
+
+macOS / MacBook:
+
+```bash
+cd backend
+source venv/bin/activate
+python3 evaluate.py
+```
+
+Kết quả chi tiết được lưu tại:
+
+```text
+evaluation_results.csv
+```
+
+Kết quả hiện tại trên tập test 342 ảnh:
+
+```text
+Top-1 Accuracy: 76.0%
+Top-2 Accuracy: 81.6%
+Top-3 Accuracy: 83.3%
+```
+
+## 8. Ghi chú khi triển khai
+
+- Lần đầu chạy backend, model CLIP sẽ được tải và load vào RAM nên có thể mất thời gian.
+- Nếu thay đổi dữ liệu trong `dataset_aug` hoặc `metadata.csv`, cần chạy lại:
+
+```bash
+python rebuild_faiss.py
+```
+
+hoặc trên macOS:
+
+```bash
+python3 rebuild_faiss.py
+```
+
+- Nếu frontend không gọi được backend, kiểm tra backend có chạy ở `http://localhost:8000` hay không.
+- Nếu ảnh mẫu không hiển thị, kiểm tra đường dẫn `image_path` trong `metadata.csv` và thư mục `dataset_aug`.
+
+## 9. Tài liệu tham khảo
+
+- QCVN 41:2019/BGTVT - Quy chuẩn kỹ thuật quốc gia về báo hiệu đường bộ.
+- QCVN 41:2024/BGTVT - Quy chuẩn kỹ thuật quốc gia về báo hiệu đường bộ.
+- CLIP: https://github.com/openai/CLIP
+- FAISS: https://faiss.ai/
+- FastAPI: https://fastapi.tiangolo.com/
+- ReactJS: https://react.dev/

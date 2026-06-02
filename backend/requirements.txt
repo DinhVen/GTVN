@@ -1,9 +1,17 @@
+# Backend API
 fastapi
 uvicorn
 python-multipart
-faiss-cpu
-transformers
-torch
-pandas
-Pillow
 pydantic
+
+# AI / ML
+torch
+transformers
+faiss-cpu
+
+# Data
+pandas
+numpy
+Pillow
+opencv-python
+tqdm
