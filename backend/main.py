@@ -13,17 +13,18 @@ from fastapi.staticfiles import StaticFiles
 from PIL import Image, ImageOps
 from transformers import CLIPModel, CLIPProcessor
 
-# ──────────────────────────────────────────────────────────
-# Cấu hình
-# ──────────────────────────────────────────────────────────
+# Cấu hình //
 MODEL_NAME = "openai/clip-vit-large-patch14"
 IMAGE_SIZE = (224, 224)
 TEXT_BATCH_SIZE = 64
 TOP_CANDIDATES = 50
+MAX_TOP_K = 10
 TEXT_SCORE_WEIGHT = 1.8
 DISPLAY_SCORE_DENOMINATOR = 1.6
 MIRROR_WRONG_DIRECTION_PENALTY = 0.30
 MIRROR_CORRECT_DIRECTION_BONUS = 0.10
+DEFAULT_GROUP_DESC = "a Vietnamese traffic"
+RESAMPLE_FILTER = Image.Resampling.BILINEAR if hasattr(Image, "Resampling") else Image.BILINEAR
 
 # Hai prompt dùng cho OOD check (bước 3).
 OOD_PROMPTS = [
@@ -60,9 +61,8 @@ LABEL_ALIASES = {
     "P.127_50": "P.127",
 }
 
-# ──────────────────────────────────────────────────────────
-# Khởi tạo đường dẫn và biến toàn cục
-# ──────────────────────────────────────────────────────────
+
+# Khởi tạo đường dẫn và biến toàn cục //
 torch.set_num_threads(os.cpu_count() or 4)
 torch.set_num_interop_threads(1)
 
@@ -83,9 +83,7 @@ ood_text_feats: torch.Tensor | None = None
 all_text_feats: torch.Tensor | None = None
 
 
-# ──────────────────────────────────────────────────────────
-# Hàm tiện ích
-# ──────────────────────────────────────────────────────────
+# Hàm tiện ích//
 def _require_file(path: str, label: str) -> None:
     """Kiểm tra file tồn tại, raise lỗi nếu không."""
     if not os.path.exists(path):
@@ -113,9 +111,47 @@ def _display_image_path(image_path: str) -> str:
     return image_path.replace("\\", "/")
 
 
-# ──────────────────────────────────────────────────────────
-# Encode (mã hóa) bằng CLIP
-# ──────────────────────────────────────────────────────────
+def _normalize_top_k(top_k: int) -> int:
+    """Giới hạn số kết quả trả về."""
+    return max(1, min(int(top_k), MAX_TOP_K))
+
+
+def _resources_ready() -> bool:
+    """Kiểm tra tài nguyên AI đã load xong chưa."""
+    resources = (model, processor, faiss_index, metadata_records, ood_text_feats, all_text_feats)
+    return all(resource is not None for resource in resources)
+
+
+def _group_description(group: str) -> str:
+    """Lấy mô tả hình dạng/màu sắc theo nhóm biển."""
+    normalized_group = str(group or "").lower().strip()
+    return GROUP_DESC.get(normalized_group, DEFAULT_GROUP_DESC)
+
+
+def _build_text_prompt(record: dict) -> str:
+    """Tạo prompt text từ group và meaning trong metadata."""
+    group_desc = _group_description(record.get("group", ""))
+    meaning = record.get("meaning", "")
+    return f"A photo of {group_desc} sign that means: {meaning}"
+
+
+def _has_mirror_pair(candidates: list[dict]) -> bool:
+    """Kiểm tra pool ứng viên có cặp trái/phải không."""
+    labels = {c["label"] for c in candidates}
+    return any(MIRROR_PAIRS.get(label) in labels for label in labels)
+
+
+async def _read_upload_image(file: UploadFile) -> Image.Image:
+    """Đọc file upload và chuyển sang ảnh RGB."""
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Tệp tải lên phải là hình ảnh (JPG, PNG, JPEG).")
+    try:
+        return Image.open(io.BytesIO(await file.read())).convert("RGB")
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"Không đọc được ảnh: {exc}") from exc
+
+
+# Encode (mã hóa) bằng CLIP //
 def _encode_texts(prompts: list[str]) -> torch.Tensor:
     """Mã hóa danh sách câu text → tensor [N, 768]."""
     batches = []
@@ -142,9 +178,7 @@ def _encode_images(images: list[Image.Image]) -> torch.Tensor:
         return _normalize(feats)
 
 
-# ──────────────────────────────────────────────────────────
-# Pipeline 6 bước
-# ──────────────────────────────────────────────────────────
+# Pipeline 6 bước //
 def _check_ood(query: torch.Tensor) -> None:
     """Bước 3 — OOD check: reject nếu ảnh không phải biển báo."""
     sims = (query @ ood_text_feats.T)[0].cpu().numpy()
@@ -161,7 +195,7 @@ def _search_faiss(query_vec: np.ndarray) -> tuple[list[dict], list[int]]:
     distances, indices = faiss_index.search(query_vec, TOP_CANDIDATES)
     candidates, cand_indices = [], []
     for pos, idx in enumerate(indices[0]):
-        if idx == -1:
+        if idx == -1 or idx >= len(metadata_records):
             continue
         row = metadata_records[idx]
         score = float(distances[0][pos])
@@ -225,9 +259,7 @@ def _format_results(candidates: list[dict], top_k: int) -> list[dict]:
     return results
 
 
-# ──────────────────────────────────────────────────────────
-# FastAPI
-# ──────────────────────────────────────────────────────────
+# FastAPI //
 app = FastAPI(title="Traffic Sign Recognition API")
 app.add_middleware(
     CORSMiddleware,
@@ -258,15 +290,17 @@ def load_resources():
     df = pd.read_csv(METADATA_PATH)
     metadata_records = df.fillna("").to_dict("records")
 
+    if faiss_index.ntotal != len(metadata_records):
+        print(
+            "WARNING: FAISS index and metadata length mismatch "
+            f"({faiss_index.ntotal} vectors vs {len(metadata_records)} records)."
+        )
+
     print("Pre-computing OOD text embeddings...")
     ood_text_feats = _encode_texts(OOD_PROMPTS)
 
     print("Pre-computing text embeddings for all signs...")
-    prompts = [
-        f"A photo of {GROUP_DESC.get(str(r.get('group','')).lower().strip(), 'a Vietnamese traffic')} sign that means: {r.get('meaning','')}"
-        for r in metadata_records
-    ]
-    all_text_feats = _encode_texts(prompts)
+    all_text_feats = _encode_texts([_build_text_prompt(record) for record in metadata_records])
 
     print(f"Ready! {faiss_index.ntotal} vectors, {len(metadata_records)} records.")
 
@@ -279,24 +313,17 @@ def health_check():
 @app.post("/search")
 async def search_sign(file: UploadFile = File(...), top_k: int = 3):
     """API nhận diện biển báo — pipeline 6 bước."""
-    if any(r is None for r in (model, processor, faiss_index, metadata_records, all_text_feats)):
+    if not _resources_ready():
         raise HTTPException(status_code=503, detail="Server đang tải, vui lòng đợi.")
 
-    # Đọc ảnh upload
-    if not file.content_type or not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="Tệp tải lên phải là hình ảnh (JPG, PNG, JPEG).")
-    try:
-        image = Image.open(io.BytesIO(await file.read())).convert("RGB")
-    except Exception as exc:
-        raise HTTPException(status_code=400, detail=f"Không đọc được ảnh: {exc}") from exc
-
-    top_k = max(1, min(int(top_k), 10))
+    image = await _read_upload_image(file)
+    top_k = _normalize_top_k(top_k)
 
     try:
         t0 = time.perf_counter()
 
         # Bước 1: Resize
-        img = image.resize(IMAGE_SIZE, Image.BILINEAR)
+        img = image.resize(IMAGE_SIZE, RESAMPLE_FILTER)
 
         # Bước 2: CLIP encode
         query_feat = _encode_images([img])
@@ -313,8 +340,7 @@ async def search_sign(file: UploadFile = File(...), top_k: int = 3):
         _rerank_text(candidates, cand_idx, query_t)
 
         # Bước 6: Mirror fix (chỉ khi có cặp đối xứng trong ứng viên)
-        cand_labels = {c["label"] for c in candidates}
-        if any(MIRROR_PAIRS.get(lb) in cand_labels for lb in cand_labels):
+        if _has_mirror_pair(candidates):
             flipped_feat = _encode_images([ImageOps.mirror(img)])
             _fix_mirror(candidates, query_t, flipped_feat[0:1])
 

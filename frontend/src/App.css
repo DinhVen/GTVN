@@ -13,8 +13,23 @@
   margin-bottom: 20px;
 }
 
+.brand-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
 .title {
   color: #000;
+  margin: 0;
 }
 
 .subtitle {
@@ -97,6 +112,67 @@
 .error-message {
   color: #ff4d4f;
   margin-top: 1rem;
+}
+
+.quick-guide {
+  margin-top: 18px;
+  padding: 24px 26px;
+  background: #f4f5f7;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.quick-guide h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+  color: #222;
+}
+
+.quick-guide-subtitle {
+  max-width: 480px;
+  margin: 8px auto 20px;
+  color: #666;
+  font-size: 13px;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  text-align: left;
+}
+
+.guide-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.guide-icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: #e8f0ff;
+  border: 1px solid #c7d8ff;
+  align-items: center;
+  justify-content: center;
+  color: #1d5fd1;
+}
+
+.guide-item h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #222;
+}
+
+.guide-item p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #666;
 }
 
 .cards-container {
@@ -200,4 +276,10 @@
   border-color: #1976d2;
   background: #bbdefb;
   color: #1565c0;
+}
+
+@media (max-width: 640px) {
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -4,15 +4,37 @@ import 'react-image-crop/dist/ReactCrop.css';
 import './App.css';
 
 const API_BASE_URL = 'http://localhost:8000';
+const BRAND_LOGO_SRC = '/logo GTVN.png';
+const FALLBACK_LOGO_SRC = '/favicon.svg';
+const PLACEHOLDER_IMAGE_SRC = 'https://via.placeholder.com/200?text=Loi+Anh';
 const DEFAULT_CROP = { unit: '%', width: 80, height: 80, x: 10, y: 10 };
 const LOADED_IMAGE_CROP = { unit: '%', width: 90, height: 90, x: 5, y: 5 };
 const LABEL_ALIASES = {
   'P.127_50': 'P.127',
 };
+
 const SHAPES = [
   { value: 'rect', title: 'Chữ nhật', icon: RectIcon },
   { value: 'circle', title: 'Tròn (biển cấm)', icon: CircleIcon },
   { value: 'triangle', title: 'Tam giác (biển nguy hiểm)', icon: TriangleIcon },
+];
+
+const QUICK_GUIDE_STEPS = [
+  {
+    title: 'Tải ảnh lên',
+    text: 'Chọn ảnh từ máy, kéo thả ảnh vào khung hoặc dán ảnh bằng Ctrl+V.',
+    icon: UploadGuideIcon,
+  },
+  {
+    title: 'Khoanh vùng biển báo',
+    text: 'Kéo khung chọn sao cho bao quanh đúng phần biển báo cần nhận diện.',
+    icon: CropGuideIcon,
+  },
+  {
+    title: 'Xem kết quả',
+    text: 'Bấm nhận diện để xem loại biển, mã biển, ý nghĩa và lời khuyên.',
+    icon: ResultGuideIcon,
+  },
 ];
 function RectIcon() {
   return (
@@ -48,6 +70,23 @@ function getCropPixels(crop, image) {
   };
 }
 
+function isImageFile(file) {
+  return file?.type?.startsWith('image/');
+}
+
+function isUsableCrop(crop) {
+  return crop && crop.width > 0 && crop.height > 0;
+}
+
+function getResultImageSrc(imagePath) {
+  return `${API_BASE_URL}/${encodeURI(imagePath)}`;
+}
+
+function setFallbackImage(event) {
+  event.currentTarget.onerror = null;
+  event.currentTarget.src = PLACEHOLDER_IMAGE_SRC;
+}
+
 function applyShapeClip(ctx, shape, width, height) {
   if (shape === 'rect') return false;
 
@@ -63,6 +102,40 @@ function applyShapeClip(ctx, shape, width, height) {
   }
   ctx.clip();
   return true;
+}
+
+function createCroppedImageBlob(image, crop, shape) {
+  const canvas = document.createElement('canvas');
+  const scaleX = image.naturalWidth / image.width;
+  const scaleY = image.naturalHeight / image.height;
+  const cropWidth = crop.width * scaleX;
+  const cropHeight = crop.height * scaleY;
+
+  canvas.width = cropWidth;
+  canvas.height = cropHeight;
+
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, cropWidth, cropHeight);
+
+  const clipped = applyShapeClip(ctx, shape, cropWidth, cropHeight);
+  ctx.drawImage(
+    image,
+    crop.x * scaleX,
+    crop.y * scaleY,
+    cropWidth,
+    cropHeight,
+    0,
+    0,
+    cropWidth,
+    cropHeight,
+  );
+
+  if (clipped) ctx.restore();
+
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => resolve(blob), 'image/jpeg');
+  });
 }
 
 function formatGroup(group) {
@@ -146,17 +219,21 @@ function ShapeControls({ selectedShape, onChange }) {
   return (
     <div className="shape-bar">
       <span className="shape-bar-label">Crop:</span>
-      {SHAPES.map(({ value, title, icon }) => (
-        <button
-          key={value}
-          className={`shape-btn-sm ${selectedShape === value ? 'active' : ''}`}
-          onClick={() => onChange(value)}
-          title={title}
-          type="button"
-        >
-          {React.createElement(icon)}
-        </button>
-      ))}
+      {SHAPES.map(({ value, title, icon: Icon }) => {
+        const isActive = selectedShape === value;
+
+        return (
+          <button
+            key={value}
+            className={`shape-btn-sm ${isActive ? 'active' : ''}`}
+            onClick={() => onChange(value)}
+            title={title}
+            type="button"
+          >
+            <Icon />
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -176,19 +253,142 @@ function UploadBox({ fileInputRef, onClick, onFileChange }) {
   );
 }
 
+function QuickGuide() {
+  return (
+    <section className="quick-guide">
+      <h2>Cách sử dụng công cụ nhận diện biển báo</h2>
+      <p className="quick-guide-subtitle">
+        Thực hiện các bước đơn giản để hệ thống tìm biển báo tương đồng nhất.
+      </p>
+      <div className="guide-grid">
+        {QUICK_GUIDE_STEPS.map(({ title, text, icon: Icon }) => (
+          <div className="guide-item" key={title}>
+            <span className="guide-icon" aria-hidden="true">
+              <Icon />
+            </span>
+            <div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function UploadGuideIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path d="M12 16V4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M7 9l5-5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 20h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CropGuideIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path d="M7 3v14a2 2 0 0 0 2 2h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M3 7h14a2 2 0 0 1 2 2v14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M7 7h10v10H7z" fill="none" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function ResultGuideIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path d="M5 12l4 4L19 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 20h16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BrandLogo() {
+  return (
+    <img
+      src={BRAND_LOGO_SRC}
+      alt="Logo nhận diện biển báo"
+      className="brand-logo"
+      onError={(event) => {
+        event.currentTarget.onerror = null;
+        event.currentTarget.src = FALLBACK_LOGO_SRC;
+      }}
+    />
+  );
+}
+
+function Header() {
+  return (
+    <header className="header">
+      <div className="brand-heading">
+        <BrandLogo />
+        <h1 className="title">Nhận diện Biển Báo Giao Thông Việt Nam</h1>
+      </div>
+      <p className="subtitle">Tìm kiếm bằng phương pháp Embeddings (theo QCVN 41)</p>
+    </header>
+  );
+}
+
+function PreviewPanel({
+  crop,
+  imageRef,
+  loading,
+  onCropChange,
+  onCropComplete,
+  onReset,
+  onSearch,
+  onShapeChange,
+  preview,
+  selectedShape,
+}) {
+  return (
+    <div className="preview-container">
+      <p className="crop-hint">
+        * Kéo chọn vùng biển báo, chọn hình dạng crop phù hợp để kết quả chính xác hơn!
+      </p>
+      <div className="crop-stage">
+        <ReactCrop
+          crop={crop}
+          onChange={onCropChange}
+          onComplete={onCropComplete}
+        >
+          <img
+            src={preview}
+            ref={imageRef}
+            alt="Upload preview"
+            className="preview-image"
+            onLoad={() => onCropChange(LOADED_IMAGE_CROP)}
+          />
+        </ReactCrop>
+        <ShapeOverlay crop={crop} image={imageRef.current} shape={selectedShape} />
+      </div>
+
+      <div className="preview-actions">
+        <ShapeControls selectedShape={selectedShape} onChange={onShapeChange} />
+        <button className="btn-search btn-primary" onClick={onSearch} disabled={loading} type="button">
+          {loading ? <span className="loader">Đang tải...</span> : 'Cắt ảnh & Nhận diện'}
+        </button>
+        <button className="btn-search" onClick={onReset} disabled={loading} type="button">
+          Làm mới
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function ResultCard({ item }) {
   return (
     <div className="result-card">
       <div className="result-image-wrapper">
         {item.image_path ? (
           <img
-            src={`${API_BASE_URL}/${encodeURI(item.image_path)}`}
+            src={getResultImageSrc(item.image_path)}
             alt={item.label}
             className="result-image"
-            onError={(event) => {
-              event.target.onerror = null;
-              event.target.src = 'https://via.placeholder.com/200?text=Loi+Anh';
-            }}
+            onError={setFallbackImage}
           />
         ) : (
           <div className="missing-image">-</div>
@@ -209,6 +409,21 @@ function ResultCard({ item }) {
   );
 }
 
+function ResultsSection({ results }) {
+  if (results.length === 0) return null;
+
+  return (
+    <section className="results-section">
+      <h2 className="results-title">Kết quả tương đồng nhất</h2>
+      <div className="cards-container">
+        {results.map((item) => (
+          <ResultCard key={`${item.rank}-${item.label}`} item={item} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -222,21 +437,23 @@ function App() {
   const imgRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const resetCropState = () => {
+  const resetCropState = useCallback(() => {
     setCrop(DEFAULT_CROP);
     setCompletedCrop(null);
     setShapeMask('rect');
-  };
+  }, []);
 
-  const resetSession = () => {
+  const resetSession = useCallback(() => {
     setSelectedFile(null);
     setPreview(null);
     setResults([]);
     setError('');
     resetCropState();
-  };
+  }, [resetCropState]);
 
   const processFile = useCallback((file) => {
+    if (!isImageFile(file)) return;
+
     setSelectedFile(file);
     setResults([]);
     setError('');
@@ -247,14 +464,12 @@ function App() {
       resetCropState();
     };
     reader.readAsDataURL(file);
-  }, []);
+  }, [resetCropState]);
 
   useEffect(() => {
     const handlePaste = (event) => {
       const file = event.clipboardData?.files?.[0];
-      if (file?.type.startsWith('image/')) {
-        processFile(file);
-      }
+      processFile(file);
     };
 
     window.addEventListener('paste', handlePaste);
@@ -267,46 +482,18 @@ function App() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file) processFile(file);
+    processFile(file);
+    event.target.value = '';
   };
 
   const getCroppedImgBlob = async () => {
     const image = imgRef.current;
-    if (!image || !completedCrop || completedCrop.width <= 0 || completedCrop.height <= 0) {
+    if (!image || !isUsableCrop(completedCrop)) {
       return selectedFile;
     }
 
-    const canvas = document.createElement('canvas');
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    const cropWidth = completedCrop.width * scaleX;
-    const cropHeight = completedCrop.height * scaleY;
-
-    canvas.width = cropWidth;
-    canvas.height = cropHeight;
-
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, cropWidth, cropHeight);
-
-    const clipped = applyShapeClip(ctx, shapeMask, cropWidth, cropHeight);
-    ctx.drawImage(
-      image,
-      completedCrop.x * scaleX,
-      completedCrop.y * scaleY,
-      cropWidth,
-      cropHeight,
-      0,
-      0,
-      cropWidth,
-      cropHeight,
-    );
-
-    if (clipped) ctx.restore();
-
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => resolve(blob), 'image/jpeg');
-    });
+    const croppedBlob = await createCroppedImageBlob(image, completedCrop, shapeMask);
+    return croppedBlob || selectedFile;
   };
 
   const handleSearch = async () => {
@@ -341,10 +528,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="header">
-        <h1 className="title">Nhận diện Biển Báo Giao Thông Việt Nam</h1>
-        <p className="subtitle">Tìm kiếm bằng phương pháp Embeddings (theo QCVN 41)</p>
-      </header>
+      <Header />
 
       <main>
         <div className="upload-section">
@@ -355,52 +539,28 @@ function App() {
               onFileChange={handleFileChange}
             />
           ) : (
-            <div className="preview-container">
-              <p className="crop-hint">
-                * Kéo chọn vùng biển báo, chọn hình dạng crop phù hợp để kết quả chính xác hơn!
-              </p>
-              <div className="crop-stage">
-                <ReactCrop
-                  crop={crop}
-                  onChange={(nextCrop) => setCrop(nextCrop)}
-                  onComplete={(nextCrop) => setCompletedCrop(nextCrop)}
-                >
-                  <img
-                    src={preview}
-                    ref={imgRef}
-                    alt="Upload preview"
-                    className="preview-image"
-                    onLoad={() => setCrop(LOADED_IMAGE_CROP)}
-                  />
-                </ReactCrop>
-                <ShapeOverlay crop={crop} image={imgRef.current} shape={shapeMask} />
-              </div>
-
-              <div className="preview-actions">
-                <ShapeControls selectedShape={shapeMask} onChange={setShapeMask} />
-                <button className="btn-search btn-primary" onClick={handleSearch} disabled={loading} type="button">
-                  {loading ? <span className="loader">Đang tải...</span> : 'Cắt ảnh & Nhận diện'}
-                </button>
-                <button className="btn-search" onClick={resetSession} disabled={loading} type="button">
-                  Làm mới
-                </button>
-              </div>
-            </div>
+            <PreviewPanel
+              crop={crop}
+              imageRef={imgRef}
+              loading={loading}
+              onCropChange={setCrop}
+              onCropComplete={setCompletedCrop}
+              onReset={resetSession}
+              onSearch={handleSearch}
+              onShapeChange={setShapeMask}
+              preview={preview}
+              selectedShape={shapeMask}
+            />
           )}
         </div>
 
+        {results.length === 0 && !loading && !error && (
+          <QuickGuide />
+        )}
+
         {error && <div className="error-message">{error}</div>}
 
-        {results.length > 0 && (
-          <section className="results-section">
-            <h2 className="results-title">Kết quả tương đồng nhất</h2>
-            <div className="cards-container">
-              {results.map((item) => (
-                <ResultCard key={`${item.rank}-${item.label}`} item={item} />
-              ))}
-            </div>
-          </section>
-        )}
+        <ResultsSection results={results} />
       </main>
     </div>
   );
