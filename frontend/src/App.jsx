@@ -392,7 +392,7 @@ function ResultCard({ item }) {
         <span className="result-group"><strong>Loại biển:</strong> {formatGroup(item.group)}</span>
         <span className="result-label"><strong>Ký hiệu (Mã biển):</strong> {item.label}</span>
         <p className="result-meaning">
-          <strong>Chức năng / Mô tả:</strong> {displayMeaning(item.meaning)}
+          <strong>Ý nghĩa biển báo:</strong> {displayMeaning(item.meaning)}
         </p>
         <div className="result-advice">
           <strong>Lời khuyên:</strong> {item.advice}
