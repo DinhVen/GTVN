@@ -14,10 +14,3 @@ env/
 # IDE
 .DS_Store
 .vscode/
-
-# Personal docs (not for repo)
-BAO_CAO_CONG_VIEC.txt
-BAO_CAO_DO_AN.md
-thuyetminhdetai.txt
-*.docx
-*.pptx
