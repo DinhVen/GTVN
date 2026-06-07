@@ -7094,3 +7094,25 @@ dataset_aug/Supplementary Signs/DP.135/1_rot45.png,biển phụ,Supplementary Si
 dataset_aug/Supplementary Signs/DP.135/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
 dataset_aug/Supplementary Signs/DP.135/1_zoom_in.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
 dataset_aug/Supplementary Signs/DP.135/1_zoom_out.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Information Signs/I.428b/1.png,chỉ dẫn,Information Signs,I.428b,,Trạm nạp điện,Phía trước có trạm nạp điện cho phương tiện; có thể dừng để sạc khi cần.
+dataset_aug/Information Signs/I.428c/1.png,chỉ dẫn,Information Signs,I.428c,,Cửa hàng xăng dầu và trạm nạp điện,Phía trước có nơi cung cấp xăng dầu và nạp điện cho phương tiện.
+dataset_aug/Supplementary Signs/S.501/1.png,biển phụ,Supplementary Signs,S.501,,Phạm vi tác dụng của biển,Biển cho biết chiều dài đoạn đường mà biển chính có hiệu lực.
+dataset_aug/Supplementary Signs/S.502/1.png,biển phụ,Supplementary Signs,S.502,,Khoảng cách đến đối tượng báo hiệu,Biển cho biết khoảng cách từ vị trí đặt biển đến nơi cần chú ý phía trước.
+dataset_aug/Supplementary Signs/S.503a/1.png,biển phụ,Supplementary Signs,S.503a,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo hướng mũi tên chỉ dẫn.
+dataset_aug/Supplementary Signs/S.503b/1.png,biển phụ,Supplementary Signs,S.503b,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo hướng mũi tên chỉ dẫn.
+dataset_aug/Supplementary Signs/S.503c/1.png,biển phụ,Supplementary Signs,S.503c,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo hai hướng chỉ dẫn.
+dataset_aug/Supplementary Signs/S.503d/1.png,biển phụ,Supplementary Signs,S.503d,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo hướng phía trước.
+dataset_aug/Supplementary Signs/S.503e/1.png,biển phụ,Supplementary Signs,S.503e,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo cả phía trước và phía sau.
+dataset_aug/Supplementary Signs/S.503f/1.png,biển phụ,Supplementary Signs,S.503f,,Hướng tác dụng của biển,Biển cho biết hiệu lực của biển chính theo hướng phía sau.
+dataset_aug/Supplementary Signs/S.504/1.png,biển phụ,Supplementary Signs,S.504,,Làn đường,Biển cho biết biển chính có hiệu lực đối với làn đường được chỉ dẫn.
+dataset_aug/Supplementary Signs/S.505a/1.png,biển phụ,Supplementary Signs,S.505a,,Loại xe,Biển cho biết biển chính áp dụng cho loại xe được thể hiện trên biển phụ.
+dataset_aug/Supplementary Signs/S.505b/1.png,biển phụ,Supplementary Signs,S.505b,,Loại xe hạn chế qua cầu,Biển cho biết loại xe và tải trọng toàn bộ xe được phép qua cầu.
+dataset_aug/Supplementary Signs/S.505c/1.png,biển phụ,Supplementary Signs,S.505c,,Tải trọng trục hạn chế qua cầu,Biển cho biết tải trọng trục xe được phép qua cầu.
+dataset_aug/Supplementary Signs/S.506a/1.png,biển phụ,Supplementary Signs,S.506a,,Hướng đường ưu tiên,Biển chỉ hướng đường ưu tiên tại nơi giao nhau.
+dataset_aug/Supplementary Signs/S.506b/1.png,biển phụ,Supplementary Signs,S.506b,,Hướng đường ưu tiên,Biển chỉ hướng đường ưu tiên tại nơi giao nhau.
+dataset_aug/Supplementary Signs/S.507/1.png,biển phụ,Supplementary Signs,S.507,,Hướng rẽ,"Biển chỉ hướng rẽ hoặc dẫn hướng tại đường cong, đảo giao thông."
+dataset_aug/Supplementary Signs/S.508a/1.png,biển phụ,Supplementary Signs,S.508a,,Thời gian hiệu lực,Biển cho biết thời gian trong ngày mà biển chính có hiệu lực.
+dataset_aug/Supplementary Signs/S.508b/1.png,biển phụ,Supplementary Signs,S.508b,,Thời gian hiệu lực,Biển cho biết ngày hoặc khoảng thời gian mà biển chính có hiệu lực.
+"dataset_aug/Supplementary Signs/S.H,3a/1.png",biển phụ,Supplementary Signs,"S.H,3a",,Hướng tác dụng của biển,Biển cho biết hướng tác dụng của biển trên tuyến đường đối ngoại hoặc khu vực cần chỉ dẫn rõ.
+"dataset_aug/Supplementary Signs/S.H,3b/1.png",biển phụ,Supplementary Signs,"S.H,3b",,Hướng tác dụng của biển,Biển cho biết hướng tác dụng của biển trên tuyến đường đối ngoại hoặc khu vực cần chỉ dẫn rõ.
+"dataset_aug/Supplementary Signs/S.H,3c/1.png",biển phụ,Supplementary Signs,"S.H,3c",,Hướng tác dụng của biển,Biển cho biết hướng tác dụng của biển trên tuyến đường đối ngoại hoặc khu vực cần chỉ dẫn rõ.
