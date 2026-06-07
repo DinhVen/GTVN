@@ -1,151 +1,313 @@
 # Nhận diện Biển báo Giao thông Việt Nam
 
-Hệ thống nhận diện biển báo giao thông Việt Nam bằng phương pháp **Embedding-based Image Retrieval**, sử dụng mô hình **CLIP** để trích xuất đặc trưng ảnh và **FAISS** để tìm kiếm tương đồng. Dữ liệu tuân theo tiêu chuẩn **QCVN 41:2024/BGTVT**.
+Hệ thống nhận diện biển báo giao thông đường bộ ở Việt Nam từ ảnh đầu vào. Người dùng có thể tải ảnh, dán ảnh hoặc kéo thả ảnh vào giao diện, sau đó khoanh vùng biển báo cần nhận diện. Backend xử lý ảnh, tạo vector embedding bằng CLIP, tìm kiếm ảnh mẫu gần nhất bằng FAISS và trả về nhóm biển, mã biển, ý nghĩa, lời khuyên và độ tương đồng.
 
-## Yêu cầu hệ thống
+Dữ liệu được tổ chức theo định hướng QCVN 41, gồm 5 nhóm biển báo giao thông: biển cấm, biển nguy hiểm, biển hiệu lệnh, biển chỉ dẫn và biển phụ.
 
-| Thành phần | Yêu cầu tối thiểu |
+## 1. Yêu cầu hệ thống
+
+| Thành phần | Yêu cầu |
 |---|---|
-| **OS** | Windows 10+, Ubuntu 20.04+, macOS 12+ |
-| **Python** | 3.10 trở lên |
-| **Node.js** | 18 trở lên |
-| **RAM** | 8 GB (khuyến nghị 16 GB) |
-| **GPU** | Không bắt buộc (hỗ trợ CUDA nếu có) |
-| **Dung lượng** | ~5 GB (model CLIP + dataset + FAISS index) |
+| Hệ điều hành | Windows 10+, macOS 12+, Ubuntu 20.04+ |
+| Python | 3.10 trở lên |
+| Node.js | 18 trở lên |
+| RAM | Tối thiểu 8 GB, khuyến nghị 16 GB |
+| GPU | Không bắt buộc, có CUDA thì chạy nhanh hơn |
+| Dung lượng | Khoảng vài GB do có dataset, FAISS index và model CLIP |
 
-## Công nghệ sử dụng
+## 2. Công nghệ sử dụng
 
 | Công nghệ | Vai trò |
 |---|---|
-| **CLIP** (ViT-Large/14) | Trích xuất vector đặc trưng 768 chiều từ ảnh |
-| **FAISS** (IndexFlatIP) | Tìm kiếm vector tương đồng (Inner Product) |
-| **FastAPI** | Backend API server |
-| **PyTorch** | Framework deep learning, chạy inference CLIP |
-| **React + Vite** | Frontend giao diện người dùng |
-| **Pillow / OpenCV** | Xử lý ảnh, data augmentation |
-| **Pandas** | Quản lý metadata |
+| CLIP ViT-Large/14 | Chuyển ảnh biển báo thành vector embedding 768 chiều |
+| FAISS IndexFlatIP | Tìm kiếm vector ảnh mẫu gần nhất |
+| FastAPI | Xây dựng backend API |
+| PyTorch | Chạy mô hình CLIP |
+| Pillow | Đọc ảnh, chuyển RGB, resize, lật ảnh |
+| Pandas / NumPy | Xử lý metadata và ma trận embedding |
+| React + Vite | Xây dựng giao diện người dùng |
 
-## Dữ liệu
+## 3. Dữ liệu hiện tại
 
-| Thông số | Giá trị |
+| Nội dung | Giá trị |
 |---|---|
-| Tổng số biển | 326 biển (4 nhóm) |
-| Tổng ảnh (sau augment) | ~7,058 ảnh |
-| Nhóm Cấm | Prohibitory Signs |
-| Nhóm Nguy hiểm | Warning Signs |
-| Nhóm Hiệu lệnh | Mandatory Signs |
-| Nhóm Chỉ dẫn | Information Signs |
-| Augmentation | 18 biến thể/biển (xoay, mờ, sáng/tối, phối cảnh, zoom) |
-| Vector dimension | 768 chiều |
-| Tập test | ~300 ảnh riêng biệt |
+| Số mã biển | 326 mã biển |
+| Số dòng metadata/index | 6.983 ảnh |
+| Kích thước vector | 768 chiều |
+| File metadata | `data/metadata.csv` |
+| File embedding | `data/image_embeddings.npy` |
+| File FAISS index | `data/faiss_index.faiss` |
+| Thư mục ảnh | `dataset_aug/` |
+| Thư mục test | `data_test/` |
+
+5 nhóm biển theo cấu trúc dữ liệu:
+
+| Nhóm | Thư mục tương ứng |
+|---|---|
+| Biển cấm | `dataset_aug/Prohibitory Signs/` |
+| Biển nguy hiểm | `dataset_aug/Warning Signs/` |
+| Biển hiệu lệnh | `dataset_aug/Mandatory Signs/` |
+| Biển chỉ dẫn | `dataset_aug/Information Signs/` |
+| Biển phụ | `dataset_aug/Supplementary Signs/` |
 
 
-## Triển khai hệ thống
+## 4. Clone project từ GitHub
 
-### 1. Cài đặt Backend
+Mở Terminal hoặc PowerShell tại thư mục muốn lưu project, sau đó chạy:
 
-**Windows (PowerShell):**
+**Windows / PowerShell**
+
 ```powershell
-cd backend
-pip install -r requirements.txt
+git clone https://github.com/DinhVen/GTVN.git
+cd GTVN
 ```
 
-**Linux / macOS (Terminal):**
+**macOS / Linux**
+
 ```bash
-cd backend
-pip3 install -r requirements.txt
+git clone https://github.com/DinhVen/GTVN.git
+cd GTVN
 ```
 
-> Nếu dùng GPU (CUDA), cài thêm: `pip install torch --index-url https://download.pytorch.org/whl/cu121`
+## 5. Cài đặt Backend
 
-### 2. Chạy Backend
+Khuyến nghị tạo môi trường ảo để thư viện của project không lẫn với máy cá nhân.
 
-**Windows:**
+**Windows / PowerShell**
+
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r backend\requirements.txt
+```
+
+**macOS / Linux**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r backend/requirements.txt
+```
+
+Lần đầu chạy backend, model CLIP có thể được tải về máy nên sẽ mất thời gian hơn các lần sau.
+
+## 6. Chạy Backend
+
+Chạy từ thư mục gốc của project:
+
+**Windows / PowerShell**
+
 ```powershell
 python backend\main.py
 ```
 
-**Linux / macOS:**
+**macOS / Linux**
+
 ```bash
 python3 backend/main.py
 ```
 
-Server chạy tại `http://localhost:8000`.
+Backend chạy tại:
 
-### 3. Chạy Frontend
+```text
+http://localhost:8000
+```
 
-**Windows:**
+API chính:
+
+```text
+POST http://localhost:8000/search
+```
+
+## 7. Cài đặt và chạy Frontend
+
+Mở thêm một Terminal hoặc PowerShell mới, vẫn ở thư mục gốc project.
+
+**Windows / PowerShell**
+
 ```powershell
 cd frontend
 npm install
 npm run dev
 ```
 
-**Linux / macOS:**
+**macOS / Linux**
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Mở `http://localhost:5173` để sử dụng.
+Frontend chạy tại:
 
-### 4. Cập nhật dataset (khi thêm/xóa biển)
+```text
+http://localhost:5173
+```
 
-**Windows:**
+Khi sử dụng:
+
+1. Chọn ảnh, kéo thả ảnh hoặc dán ảnh bằng `Ctrl + V`.
+2. Khoanh vùng biển báo cần nhận diện.
+3. Chọn dạng crop phù hợp: chữ nhật, tròn hoặc tam giác.
+4. Bấm **Cắt ảnh & Nhận diện**.
+5. Xem kết quả gồm độ tương đồng, nhóm biển, mã biển, ý nghĩa và lời khuyên.
+
+## 8. Chạy lại FAISS khi thay đổi dữ liệu
+
+Nếu chỉ clone project về để demo thì không cần chạy bước này vì project đã có sẵn `metadata.csv`, `image_embeddings.npy` và `faiss_index.faiss`.
+
+Chỉ chạy khi có thay đổi dữ liệu trong `dataset_aug/` hoặc `data/metadata.csv`.
+
+**Windows / PowerShell**
+
 ```powershell
-python backend\augment.py
 python backend\rebuild_faiss.py
 ```
 
-**Linux / macOS:**
+**macOS / Linux**
+
 ```bash
-python3 backend/augment.py
 python3 backend/rebuild_faiss.py
 ```
 
-### 5. Đánh giá accuracy (cần server đang chạy)
+Script này sẽ:
 
-**Windows:**
+1. Đọc từng dòng trong `data/metadata.csv`.
+2. Lấy `image_path` để mở ảnh tương ứng.
+3. Bỏ qua ảnh lỗi hoặc ảnh không đọc được.
+4. Dùng CLIP để encode ảnh thành vector 768 chiều.
+5. Lưu lại `image_embeddings.npy`.
+6. Tạo lại `faiss_index.faiss`.
+7. Đồng bộ lại `metadata.csv` với các ảnh hợp lệ.
+
+## 9. Tạo dữ liệu augment
+
+Chỉ chạy khi muốn sinh thêm biến thể ảnh từ ảnh gốc.
+
+**Windows / PowerShell**
+
+```powershell
+python backend\augment.py
+```
+
+**macOS / Linux**
+
+```bash
+python3 backend/augment.py
+```
+
+Sau khi augment xong, cần chạy lại:
+
+```powershell
+python backend\rebuild_faiss.py
+```
+
+Trên macOS / Linux:
+
+```bash
+python3 backend/rebuild_faiss.py
+```
+
+## 10. Đánh giá kết quả
+
+Cần chạy backend trước, sau đó chạy script đánh giá.
+
+**Windows / PowerShell**
+
 ```powershell
 python backend\evaluate.py
 ```
 
-**Linux / macOS:**
+**macOS / Linux**
+
 ```bash
 python3 backend/evaluate.py
 ```
 
-Kết quả lưu tại `evaluation_results.csv`.
+Script sẽ gửi từng ảnh trong `data_test/` lên API `/search`, so sánh nhãn dự đoán với nhãn thật và tạo file:
 
-## Cấu trúc
-
-```
-backend/
-  main.py              — API server (pipeline 5 bước)
-  augment.py           — Data augmentation (18 biến thể/biển)
-  rebuild_faiss.py     — Tạo FAISS index
-  evaluate.py          — Đánh giá accuracy
-  requirements.txt
-frontend/src/
-  App.jsx              — Giao diện (upload, crop, kết quả)
-  App.css
-data/
-  metadata.csv         — Metadata toàn bộ ảnh
-  faiss_index.faiss    — Vector index
-dataset_aug/           — ~326 biển × ~19 ảnh/biển
-data_test/             — Tập test
+```text
+evaluation_results.csv
 ```
 
-## Pipeline nhận diện
+Các chỉ số thường xem:
 
-1. **Resize** — 224×224
-2. **CLIP encode** — vector 768 chiều
-3. **FAISS search + OOD check** — top 50, reject nếu score < 0.45
-4. **Group Voting** — cộng điểm nhóm đa số
-5. **Mirror fix** — sửa nhầm trái/phải
+| Chỉ số | Ý nghĩa |
+|---|---|
+| Top-1 accuracy | Kết quả đúng nằm ở vị trí đầu tiên |
+| Top-2 accuracy | Kết quả đúng nằm trong 2 kết quả đầu |
+| Top-3 accuracy | Kết quả đúng nằm trong 3 kết quả đầu |
 
-## Công nghệ
+## 11. Cấu trúc thư mục
 
-- **Backend:** FastAPI, PyTorch, CLIP ViT-Large/14, FAISS
-- **Frontend:** React, Vite
+```text
+GTVN/
+  backend/
+    main.py              # Backend FastAPI, API /search
+    augment.py           # Sinh biến thể ảnh
+    rebuild_faiss.py     # Tạo embedding và FAISS index
+    evaluate.py          # Đánh giá Top-1, Top-2, Top-3
+    requirements.txt
+
+  frontend/
+    src/
+      App.jsx            # Giao diện chính
+      App.css            # Style giao diện
+
+  data/
+    metadata.csv         # Thông tin ảnh, nhóm biển, mã biển, ý nghĩa, lời khuyên
+    image_embeddings.npy # Ma trận vector ảnh
+    faiss_index.faiss    # Chỉ mục FAISS
+
+  dataset_aug/
+    Prohibitory Signs/   # Biển cấm
+    Warning Signs/       # Biển nguy hiểm
+    Mandatory Signs/     # Biển hiệu lệnh
+    Information Signs/   # Biển chỉ dẫn
+    Supplementary Signs/ # Biển phụ
+
+  data_test/             # Ảnh dùng để đánh giá
+```
+
+## 12. Hệ thống tổng quan nhận diện
+
+Khi người dùng gửi ảnh lên API `/search`, backend xử lý theo các bước:
+
+1. Kiểm tra file upload có phải ảnh không.
+2. Đọc ảnh bằng Pillow và chuyển sang RGB.
+3. Resize ảnh về `224x224`.
+4. Encode ảnh bằng CLIP để tạo vector 768 chiều.
+5. Tìm top 50 ảnh mẫu gần nhất bằng FAISS.
+6. OOD check: nếu điểm top-1 thấp hơn `0.70` thì từ chối vì ảnh có thể không phải biển báo.
+7. Group Voting: cộng điểm cho nhóm biển xuất hiện nhiều trong top ứng viên.
+8. Mirror Fix: xử lý các cặp biển dễ nhầm trái/phải.
+9. Lọc trùng theo `label`.
+10. Trả JSON kết quả cho frontend.
+
+Ví dụ JSON trả về:
+
+```json
+{
+  "results": [
+    {
+      "rank": 1,
+      "score": 0.95,
+      "label": "P.123b",
+      "group": "cấm",
+      "meaning": "Cấm rẽ phải",
+      "advice": "Không được rẽ phải, đi thẳng hoặc rẽ trái.",
+      "image_path": "dataset_aug/Prohibitory Signs/P.123b/1_original.png"
+    }
+  ]
+}
+```
+
+## 13. Ghi chú khi triển khai
+
+- Backend phải chạy trước frontend.
+- Nếu frontend không gọi được API, kiểm tra backend có đang chạy tại `localhost:8000` không.
+- Nếu ảnh kết quả không hiện, kiểm tra `image_path` trong `metadata.csv` và mount static `/dataset_aug`.
+- Nếu thay đổi dữ liệu, phải chạy lại `rebuild_faiss.py`.
+- Không cần upload file báo cáo Word/PowerPoint lên GitHub; các file này đã được đưa vào `.gitignore`.
+
