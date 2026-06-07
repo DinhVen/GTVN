@@ -1,20 +1,5 @@
 """
-Data Augmentation — tăng cường dữ liệu cho tất cả biển báo.
-
-Quy trình:
-  1. Duyệt dataset_aug/{Nhóm}/{Mã biển}/
-  2. Đọc ảnh gốc 1.png → sinh 18 biến thể bằng Pillow + OpenCV
-  3. Cập nhật metadata.csv với tất cả ảnh mới
-
-Kỹ thuật augmentation (18 biến thể):
-  - Bản sao gốc (1)
-  - Làm mờ GaussianBlur r=2 (1)
-  - Tăng sáng ×1.5 (1), giảm sáng ×0.5 (1)
-  - Xoay ±10°, ±20°, ±30°, ±45° (8)
-  - Biến dạng phối cảnh (2)
-  - Xô lệch ±5° (2)
-  - Zoom vào 10% (1), zoom ra 70% (1)
-
+Data Augmentation — sinh 18 biến thể cho mỗi biển báo.
 Chạy: python backend/augment.py
 """
 
@@ -25,15 +10,11 @@ import numpy as np
 import pandas as pd
 from PIL import Image, ImageEnhance, ImageFilter
 
-# ──────────────────────────────────────────────────────────
-# Cấu hình
-# ──────────────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DATASET_DIR = os.path.join(BASE_DIR, "dataset_aug")
 METADATA_PATH = os.path.join(DATA_DIR, "metadata.csv")
 
-# Ánh xạ tên thư mục nhóm → tên nhóm tiếng Việt.
 GROUP_FOLDERS = {
     "Prohibitory Signs": "cấm",
     "Warning Signs": "nguy hiểm",
@@ -41,27 +22,17 @@ GROUP_FOLDERS = {
     "Information Signs": "chỉ dẫn",
 }
 
-# Các góc xoay mô phỏng biển nghiêng.
 ROTATION_ANGLES = [10, -10, 20, -20, 30, -30, 45, -45]
-
-# Các cặp (dx, dy) cho biến dạng phối cảnh.
 PERSPECTIVE_OFFSETS = [(15, 10), (10, 15)]
-
-# Góc xô lệch.
 SHEAR_ANGLES = [(5, "shear_5deg"), (-5, "shear_m5deg")]
 
 
-# ──────────────────────────────────────────────────────────
-# Augmentation
-# ──────────────────────────────────────────────────────────
-def _save_if_new(path: str, image: Image.Image) -> None:
-    """Lưu ảnh chỉ khi file chưa tồn tại (tránh ghi đè)."""
+def _save_if_new(path, image):
     if not os.path.exists(path):
         image.save(path)
 
 
-def augment_image(img_path: str, save_dir: str) -> list[str]:
-    """Sinh 18 biến thể từ 1 ảnh gốc, trả về danh sách tên file."""
+def augment_image(img_path, save_dir):
     try:
         img = Image.open(img_path).convert("RGB")
     except Exception:
@@ -72,32 +43,22 @@ def augment_image(img_path: str, save_dir: str) -> list[str]:
     img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
     files = []
 
-    def add(name: str, image: Image.Image) -> None:
+    def add(name, image):
         _save_if_new(os.path.join(save_dir, name), image)
         files.append(name)
 
-    # 1. Bản sao gốc
     add(f"{base}_original.png", img.copy())
-
-    # 2. Làm mờ — mô phỏng camera rung, ảnh không nét
     add(f"{base}_blur.png", img.filter(ImageFilter.GaussianBlur(radius=2)))
-
-    # 3. Tăng sáng — mô phỏng trời nắng gắt
     add(f"{base}_bright.png", ImageEnhance.Brightness(img).enhance(1.5))
-
-    # 4. Giảm sáng — mô phỏng ban đêm, bóng râm
     add(f"{base}_dark.png", ImageEnhance.Brightness(img).enhance(0.5))
 
-    # 5-12. Xoay — mô phỏng biển bị nghiêng
     for angle in ROTATION_ANGLES:
         name = f"{base}_rot{angle}.png"
         path = os.path.join(save_dir, name)
         if not os.path.exists(path):
-            img.rotate(angle, expand=True, fillcolor=(255, 255, 255),
-                       resample=Image.BICUBIC).save(path)
+            img.rotate(angle, expand=True, fillcolor=(255, 255, 255), resample=Image.BICUBIC).save(path)
         files.append(name)
 
-    # 13-14. Biến dạng phối cảnh — mô phỏng nhìn từ góc lệch
     for i, (dx, dy) in enumerate(PERSPECTIVE_OFFSETS, 1):
         name = f"{base}_persp{i}.png"
         path = os.path.join(save_dir, name)
@@ -109,7 +70,6 @@ def augment_image(img_path: str, save_dir: str) -> list[str]:
             cv2.imwrite(path, warped)
         files.append(name)
 
-    # 15-16. Xô lệch — mô phỏng ảnh bị méo
     for angle_deg, suffix in SHEAR_ANGLES:
         name = f"{base}_{suffix}.png"
         path = os.path.join(save_dir, name)
@@ -121,7 +81,6 @@ def augment_image(img_path: str, save_dir: str) -> list[str]:
             Image.fromarray(cv2.cvtColor(sheared, cv2.COLOR_BGR2RGB)).save(path)
         files.append(name)
 
-    # 17. Zoom vào — mô phỏng chụp gần
     name = f"{base}_zoom_in.png"
     path = os.path.join(save_dir, name)
     if not os.path.exists(path):
@@ -129,7 +88,6 @@ def augment_image(img_path: str, save_dir: str) -> list[str]:
         img.crop((m, m, w - m, h - m)).resize((w, h), Image.LANCZOS).save(path)
     files.append(name)
 
-    # 18. Zoom ra — mô phỏng chụp xa
     name = f"{base}_zoom_out.png"
     path = os.path.join(save_dir, name)
     if not os.path.exists(path):
@@ -142,10 +100,7 @@ def augment_image(img_path: str, save_dir: str) -> list[str]:
     return files
 
 
-# ──────────────────────────────────────────────────────────
-# Main
-# ──────────────────────────────────────────────────────────
-def main() -> None:
+def main():
     rows = []
     total_signs = 0
 
@@ -159,7 +114,6 @@ def main() -> None:
             if not os.path.isdir(sign_dir):
                 continue
 
-            # Tìm ảnh gốc
             source = os.path.join(sign_dir, "1.png")
             if not os.path.exists(source):
                 pngs = sorted(f for f in os.listdir(sign_dir) if f.lower().endswith(".png"))
@@ -170,7 +124,6 @@ def main() -> None:
             augment_image(source, sign_dir)
             total_signs += 1
 
-            # Ghi metadata cho tất cả ảnh trong thư mục
             for fname in sorted(os.listdir(sign_dir)):
                 if not fname.lower().endswith((".png", ".jpg", ".jpeg")):
                     continue
@@ -186,19 +139,10 @@ def main() -> None:
 
         print(f"  {group_folder}: xong")
 
-    # Ghép meaning + advice từ metadata cũ (nếu có)
     new_df = pd.DataFrame(rows)
     if os.path.exists(METADATA_PATH):
-        old_info = (
-            pd.read_csv(METADATA_PATH)
-            .groupby("label")
-            .first()[["meaning", "advice"]]
-            .reset_index()
-        )
-        new_df = (
-            new_df.drop(columns=["meaning", "advice"])
-            .merge(old_info, on="label", how="left")
-        )
+        old_info = pd.read_csv(METADATA_PATH).groupby("label").first()[["meaning", "advice"]].reset_index()
+        new_df = new_df.drop(columns=["meaning", "advice"]).merge(old_info, on="label", how="left")
         new_df["meaning"] = new_df["meaning"].fillna("")
         new_df["advice"] = new_df["advice"].fillna("")
 

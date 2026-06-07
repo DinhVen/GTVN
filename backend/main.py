@@ -2,6 +2,7 @@ import io
 import os
 import time
 import traceback
+from collections import Counter
 
 import faiss
 import numpy as np
@@ -13,36 +14,28 @@ from fastapi.staticfiles import StaticFiles
 from PIL import Image, ImageOps
 from transformers import CLIPModel, CLIPProcessor
 
-# Cấu hình //
+# ──────────────────────────────────────────────────────────
+# Cấu hình
+# ──────────────────────────────────────────────────────────
 MODEL_NAME = "openai/clip-vit-large-patch14"
 IMAGE_SIZE = (224, 224)
-TEXT_BATCH_SIZE = 64
 TOP_CANDIDATES = 50
 MAX_TOP_K = 10
-TEXT_SCORE_WEIGHT = 1.8
-DISPLAY_SCORE_DENOMINATOR = 1.6
+DISPLAY_SCORE_DENOMINATOR = 1.1
+
+# OOD check: nếu top-1 FAISS score < ngưỡng → ảnh không phải biển báo.
+OOD_SCORE_THRESHOLD = 0.70
+
+# Group Voting: cộng/trừ điểm theo nhóm chiếm đa số trong top 50.
+GROUP_VOTING_TOP_N = 10
+GROUP_MAJORITY_BONUS = 0.20
+GROUP_MINORITY_PENALTY = 0.15
+
+# Mirror fix: trừ/cộng điểm cho cặp biển đối xứng trái/phải.
 MIRROR_WRONG_DIRECTION_PENALTY = 0.30
 MIRROR_CORRECT_DIRECTION_BONUS = 0.10
-DEFAULT_GROUP_DESC = "a Vietnamese traffic"
-RESAMPLE_FILTER = Image.Resampling.BILINEAR if hasattr(Image, "Resampling") else Image.BILINEAR
 
-# Hai prompt dùng cho OOD check (bước 3).
-OOD_PROMPTS = [
-    "A close-up photo of a traffic sign",
-    "A photo of a signature, text document, animal, scenery, or random object",
-]
-
-# Ánh xạ nhóm biển → mô tả hình dạng + màu sắc (bước 5).
-GROUP_DESC = {
-    "cấm": "a red circular prohibitory",
-    "biển cấm": "a red circular prohibitory",
-    "nguy hiểm": "a yellow triangular warning",
-    "hiệu lệnh": "a blue circular mandatory",
-    "chỉ dẫn": "a blue rectangular information",
-    "biển phụ": "a supplementary",
-}
-
-# 11 cặp biển đối xứng trái/phải (bước 6).
+# 11 cặp biển đối xứng trái/phải.
 MIRROR_PAIRS = {
     "P.123a": "P.123b", "P.123b": "P.123a",
     "P.103b": "P.103c", "P.103c": "P.103b",
@@ -56,13 +49,10 @@ MIRROR_PAIRS = {
     "R.301e": "R.301f", "R.301f": "R.301e",
 }
 
-# Gộp label hiển thị (biển cùng hình khác số).
-LABEL_ALIASES = {
-    "P.127_50": "P.127",
-}
 
-
-# Khởi tạo đường dẫn và biến toàn cục //
+# ──────────────────────────────────────────────────────────
+# Đường dẫn và biến toàn cục
+# ──────────────────────────────────────────────────────────
 torch.set_num_threads(os.cpu_count() or 4)
 torch.set_num_interop_threads(1)
 
@@ -74,16 +64,14 @@ METADATA_PATH = os.path.join(DATA_DIR, "metadata.csv")
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Tài nguyên được load khi startup, dùng chung cho tất cả request.
 model: CLIPModel | None = None
 processor: CLIPProcessor | None = None
 faiss_index: faiss.IndexFlatIP | None = None
 metadata_records: list[dict] | None = None
-ood_text_feats: torch.Tensor | None = None
-all_text_feats: torch.Tensor | None = None
 
-
-# Hàm tiện ích//
+# ──────────────────────────────────────────────────────────
+# Hàm tiện ích
+# ──────────────────────────────────────────────────────────
 def _require_file(path: str, label: str) -> None:
     """Kiểm tra file tồn tại, raise lỗi nếu không."""
     if not os.path.exists(path):
@@ -94,10 +82,6 @@ def _normalize(features: torch.Tensor) -> torch.Tensor:
     """Chuẩn hóa L2 — đưa vector về độ dài 1."""
     return features / features.norm(p=2, dim=-1, keepdim=True)
 
-
-def _display_label(label: str) -> str:
-    """Trả label hiển thị (gộp alias nếu có)."""
-    return LABEL_ALIASES.get(label, label)
 
 
 def _display_image_path(image_path: str) -> str:
@@ -111,65 +95,11 @@ def _display_image_path(image_path: str) -> str:
     return image_path.replace("\\", "/")
 
 
-def _normalize_top_k(top_k: int) -> int:
-    """Giới hạn số kết quả trả về."""
-    return max(1, min(int(top_k), MAX_TOP_K))
-
-
-def _resources_ready() -> bool:
-    """Kiểm tra tài nguyên AI đã load xong chưa."""
-    resources = (model, processor, faiss_index, metadata_records, ood_text_feats, all_text_feats)
-    return all(resource is not None for resource in resources)
-
-
-def _group_description(group: str) -> str:
-    """Lấy mô tả hình dạng/màu sắc theo nhóm biển."""
-    normalized_group = str(group or "").lower().strip()
-    return GROUP_DESC.get(normalized_group, DEFAULT_GROUP_DESC)
-
-
-def _build_text_prompt(record: dict) -> str:
-    """Tạo prompt text từ group và meaning trong metadata."""
-    group_desc = _group_description(record.get("group", ""))
-    meaning = record.get("meaning", "")
-    return f"A photo of {group_desc} sign that means: {meaning}"
-
-
-def _has_mirror_pair(candidates: list[dict]) -> bool:
-    """Kiểm tra pool ứng viên có cặp trái/phải không."""
-    labels = {c["label"] for c in candidates}
-    return any(MIRROR_PAIRS.get(label) in labels for label in labels)
-
-
-async def _read_upload_image(file: UploadFile) -> Image.Image:
-    """Đọc file upload và chuyển sang ảnh RGB."""
-    if not file.content_type or not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="Tệp tải lên phải là hình ảnh (JPG, PNG, JPEG).")
-    try:
-        return Image.open(io.BytesIO(await file.read())).convert("RGB")
-    except Exception as exc:
-        raise HTTPException(status_code=400, detail=f"Không đọc được ảnh: {exc}") from exc
-
-
-# Encode (mã hóa) bằng CLIP //
-def _encode_texts(prompts: list[str]) -> torch.Tensor:
-    """Mã hóa danh sách câu text → tensor [N, 768]."""
-    batches = []
-    with torch.inference_mode():
-        for i in range(0, len(prompts), TEXT_BATCH_SIZE):
-            inputs = processor(
-                text=prompts[i : i + TEXT_BATCH_SIZE],
-                return_tensors="pt",
-                padding=True,
-                truncation=True,
-            ).to(device)
-            feats = model.text_projection(model.text_model(**inputs).pooler_output)
-            batches.append(_normalize(feats).cpu())
-    return torch.cat(batches).to(device)
-
-
+# ──────────────────────────────────────────────────────────
+# CLIP encode
+# ──────────────────────────────────────────────────────────
 def _encode_images(images: list[Image.Image]) -> torch.Tensor:
-    """Mã hóa danh sách ảnh PIL → tensor [N, 768]."""
+    """Mã hóa danh sách ảnh PIL → tensor [N, 768], chuẩn hóa L2."""
     inputs = processor(images=images, return_tensors="pt").to(device)
     with torch.inference_mode():
         feats = model.visual_projection(
@@ -178,22 +108,13 @@ def _encode_images(images: list[Image.Image]) -> torch.Tensor:
         return _normalize(feats)
 
 
-# Pipeline 6 bước //
-def _check_ood(query: torch.Tensor) -> None:
-    """Bước 3 — OOD check: reject nếu ảnh không phải biển báo."""
-    sims = (query @ ood_text_feats.T)[0].cpu().numpy()
-    print(f"OOD: sign={sims[0]:.4f}, random={sims[1]:.4f}")
-    if sims[1] > sims[0]:
-        raise HTTPException(
-            status_code=400,
-            detail="Hình ảnh không hợp lệ! Vui lòng tải lên đúng đoạn cắt có chứa biển báo.",
-        )
-
-
-def _search_faiss(query_vec: np.ndarray) -> tuple[list[dict], list[int]]:
-    """Bước 4 — FAISS search: tìm top-K ứng viên gần nhất."""
+# ──────────────────────────────────────────────────────────
+# Pipeline nhận diện
+# ──────────────────────────────────────────────────────────
+def _search_faiss(query_vec: np.ndarray) -> list[dict]:
+    """Bước 3 — FAISS search: tìm top-50 ứng viên gần nhất."""
     distances, indices = faiss_index.search(query_vec, TOP_CANDIDATES)
-    candidates, cand_indices = [], []
+    candidates = []
     for pos, idx in enumerate(indices[0]):
         if idx == -1 or idx >= len(metadata_records):
             continue
@@ -206,21 +127,36 @@ def _search_faiss(query_vec: np.ndarray) -> tuple[list[dict], list[int]]:
             "row": row,
             "label": str(row.get("label", "Unknown")),
         })
-        cand_indices.append(idx)
-    return candidates, cand_indices
+    return candidates
 
 
-def _rerank_text(candidates: list[dict], cand_indices: list[int], query: torch.Tensor) -> None:
-    """Bước 5 — Text re-ranking: cộng điểm text vào final_score."""
-    if not cand_indices:
+def _check_ood(top1_score: float) -> None:
+    """Bước 3 — OOD check: reject nếu FAISS score quá thấp."""
+    print(f"  OOD: top1={top1_score:.4f}, threshold={OOD_SCORE_THRESHOLD}")
+    if top1_score < OOD_SCORE_THRESHOLD:
+        raise HTTPException(
+            status_code=400,
+            detail="Hình ảnh không hợp lệ! Vui lòng tải lên đúng đoạn cắt có chứa biển báo.",
+        )
+
+
+def _rerank_group_voting(candidates: list[dict]) -> None:
+    """Bước 4 — Group Voting: dùng top-N gần nhất để xác định nhóm đa số."""
+    if not candidates:
         return
-    text_sims = (query @ all_text_feats[cand_indices].T)[0].cpu().numpy()
-    for i, c in enumerate(candidates):
-        c["final_score"] = c["visual_score"] + float(text_sims[i]) * TEXT_SCORE_WEIGHT
+    top_n = candidates[:GROUP_VOTING_TOP_N]
+    group_counts = Counter(c["row"].get("group", "") for c in top_n)
+    majority_group = group_counts.most_common(1)[0][0]
+    print(f"  GROUP: majority={majority_group} (top {len(top_n)}: {dict(group_counts)})")
+    for c in candidates:
+        if c["row"].get("group", "") == majority_group:
+            c["final_score"] += GROUP_MAJORITY_BONUS
+        else:
+            c["final_score"] -= GROUP_MINORITY_PENALTY
 
 
 def _fix_mirror(candidates: list[dict], query: torch.Tensor, flipped: torch.Tensor) -> None:
-    """Bước 6 — Mirror fix: sửa nhầm trái/phải cho cặp biển đối xứng."""
+    """Bước 5 — Mirror fix: sửa nhầm trái/phải cho cặp biển đối xứng."""
     labels_in_pool = {c["label"] for c in candidates}
     for c in candidates:
         mirror = MIRROR_PAIRS.get(c["label"])
@@ -240,7 +176,7 @@ def _format_results(candidates: list[dict], top_k: int) -> list[dict]:
     """Lọc trùng theo label, tính % hiển thị, trả top-K."""
     results, seen = [], set()
     for c in sorted(candidates, key=lambda x: x["final_score"], reverse=True):
-        label = _display_label(c["label"])
+        label = c["label"]
         if label in seen:
             continue
         seen.add(label)
@@ -259,7 +195,9 @@ def _format_results(candidates: list[dict], top_k: int) -> list[dict]:
     return results
 
 
-# FastAPI //
+# ──────────────────────────────────────────────────────────
+# FastAPI
+# ──────────────────────────────────────────────────────────
 app = FastAPI(title="Traffic Sign Recognition API")
 app.add_middleware(
     CORSMiddleware,
@@ -273,8 +211,8 @@ app.mount("/dataset_aug", StaticFiles(directory=DATASET_DIR), name="dataset_aug"
 
 @app.on_event("startup")
 def load_resources():
-    """Load model, FAISS index, metadata và pre-compute text embeddings."""
-    global model, processor, faiss_index, metadata_records, ood_text_feats, all_text_feats
+    """Load model, FAISS index và metadata."""
+    global model, processor, faiss_index, metadata_records
 
     print("Loading CLIP model...")
     model = CLIPModel.from_pretrained(MODEL_NAME).to(device)
@@ -292,15 +230,8 @@ def load_resources():
 
     if faiss_index.ntotal != len(metadata_records):
         print(
-            "WARNING: FAISS index and metadata length mismatch "
-            f"({faiss_index.ntotal} vectors vs {len(metadata_records)} records)."
+            f"WARNING: mismatch {faiss_index.ntotal} vectors vs {len(metadata_records)} records"
         )
-
-    print("Pre-computing OOD text embeddings...")
-    ood_text_feats = _encode_texts(OOD_PROMPTS)
-
-    print("Pre-computing text embeddings for all signs...")
-    all_text_feats = _encode_texts([_build_text_prompt(record) for record in metadata_records])
 
     print(f"Ready! {faiss_index.ntotal} vectors, {len(metadata_records)} records.")
 
@@ -312,35 +243,42 @@ def health_check():
 
 @app.post("/search")
 async def search_sign(file: UploadFile = File(...), top_k: int = 3):
-    """API nhận diện biển báo — pipeline 6 bước."""
-    if not _resources_ready():
+    """API nhận diện biển báo — pipeline 5 bước."""
+    if not all(r is not None for r in (model, processor, faiss_index, metadata_records)):
         raise HTTPException(status_code=503, detail="Server đang tải, vui lòng đợi.")
 
-    image = await _read_upload_image(file)
-    top_k = _normalize_top_k(top_k)
+    # Đọc ảnh upload
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Tệp tải lên phải là hình ảnh (JPG, PNG, JPEG).")
+    try:
+        image = Image.open(io.BytesIO(await file.read())).convert("RGB")
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"Không đọc được ảnh: {exc}") from exc
+
+    top_k = max(1, min(int(top_k), MAX_TOP_K))
 
     try:
         t0 = time.perf_counter()
 
-        # Bước 1: Resize
-        img = image.resize(IMAGE_SIZE, RESAMPLE_FILTER)
+        # Bước 1: Resize 224×224
+        img = image.resize(IMAGE_SIZE, Image.BILINEAR)
 
-        # Bước 2: CLIP encode
+        # Bước 2: CLIP encode → vector 768 chiều
         query_feat = _encode_images([img])
         query_vec = query_feat[0:1].cpu().numpy()
         query_t = query_feat[0:1]
 
-        # Bước 3: OOD check
-        _check_ood(query_t)
+        # Bước 3: FAISS search + OOD check
+        candidates = _search_faiss(query_vec)
+        if candidates:
+            _check_ood(candidates[0]["visual_score"])
 
-        # Bước 4: FAISS search
-        candidates, cand_idx = _search_faiss(query_vec)
+        # Bước 4: Group Voting re-ranking
+        _rerank_group_voting(candidates)
 
-        # Bước 5: Text re-ranking
-        _rerank_text(candidates, cand_idx, query_t)
-
-        # Bước 6: Mirror fix (chỉ khi có cặp đối xứng trong ứng viên)
-        if _has_mirror_pair(candidates):
+        # Bước 5: Mirror fix (chỉ khi có cặp đối xứng trong ứng viên)
+        labels = {c["label"] for c in candidates}
+        if any(MIRROR_PAIRS.get(lb) in labels for lb in labels):
             flipped_feat = _encode_images([ImageOps.mirror(img)])
             _fix_mirror(candidates, query_t, flipped_feat[0:1])
 

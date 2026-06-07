@@ -1,25 +1,9 @@
-"""
-Đánh giá accuracy trên tập test data_test/.
-
-Cấu trúc test:
-    data_test/{Nhóm biển}/{Mã biển}/1.png
-
-Label đúng được lấy từ tên thư mục mã biển.
-Script chỉ đánh giá các mã biển có tồn tại trong dataset_aug để tránh tính nhầm
-các thư mục dư hoặc nhãn không có trong bộ dữ liệu chính.
-
-Chạy:
-    1. Mở backend: python backend/main.py
-    2. Chạy đánh giá: python backend/evaluate.py
-"""
-
 import os
 import sys
 from collections import defaultdict
 
 import pandas as pd
 import requests
-
 
 API_URL = "http://localhost:8000/search"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,180 +16,133 @@ IMAGE_EXTS = (".png", ".jpg", ".jpeg")
 def collect_valid_labels():
     valid = set()
     for group in sorted(os.listdir(DATASET_DIR)):
-        group_path = os.path.join(DATASET_DIR, group)
-        if not os.path.isdir(group_path):
+        gp = os.path.join(DATASET_DIR, group)
+        if not os.path.isdir(gp):
             continue
-
-        for label in sorted(os.listdir(group_path)):
-            label_path = os.path.join(group_path, label)
-            if os.path.isdir(label_path):
+        for label in sorted(os.listdir(gp)):
+            if os.path.isdir(os.path.join(gp, label)):
                 valid.add((group, label))
-
     return valid
 
 
 def collect_test_images(valid_labels):
-    images = []
-    skipped = []
-
+    images, skipped = [], []
     for group in sorted(os.listdir(TEST_DIR)):
-        group_path = os.path.join(TEST_DIR, group)
-        if not os.path.isdir(group_path):
+        gp = os.path.join(TEST_DIR, group)
+        if not os.path.isdir(gp):
             continue
-
-        for label in sorted(os.listdir(group_path)):
-            label_path = os.path.join(group_path, label)
-            if not os.path.isdir(label_path):
+        for label in sorted(os.listdir(gp)):
+            lp = os.path.join(gp, label)
+            if not os.path.isdir(lp):
                 continue
-
             if (group, label) not in valid_labels:
                 skipped.append(f"{group}/{label}")
                 continue
-
-            for img_file in sorted(os.listdir(label_path)):
-                if img_file.lower().endswith(IMAGE_EXTS):
-                    images.append((group, label, img_file, os.path.join(label_path, img_file)))
-
+            for f in sorted(os.listdir(lp)):
+                if f.lower().endswith(IMAGE_EXTS):
+                    images.append((group, label, f, os.path.join(lp, f)))
     return images, skipped
 
 
-def check_server():
+def main():
     try:
         requests.get("http://localhost:8000/", timeout=5)
     except Exception:
-        print("Server chưa chạy. Mở terminal khác và chạy: python backend/main.py")
+        print("Server chưa chạy. Mở terminal khác: python backend/main.py")
         sys.exit(1)
-
-
-def main():
-    check_server()
 
     valid_labels = collect_valid_labels()
     test_images, skipped = collect_test_images(valid_labels)
+    total = len(test_images)
 
-    print(f"Tổng mã biển hợp lệ trong dataset_aug: {len(valid_labels)}")
-    print(f"Tổng ảnh test hợp lệ: {len(test_images)}")
+    print(f"Biển hợp lệ: {len(valid_labels)}, Ảnh test: {total}")
     if skipped:
-        print(f"Bỏ qua {len(skipped)} thư mục test không hợp lệ:")
-        for item in skipped[:20]:
-            print(f"  - {item}")
-        if len(skipped) > 20:
-            print("  ...")
+        print(f"Bỏ qua {len(skipped)} thư mục: {', '.join(skipped[:10])}")
     print()
 
     results = []
-    group_stats = defaultdict(
-        lambda: {"correct1": 0, "correct2": 0, "correct3": 0, "total": 0, "errors": []}
-    )
+    group_stats = defaultdict(lambda: {"c1": 0, "c2": 0, "c3": 0, "total": 0, "errors": []})
 
-    for index, (group, true_label, img_file, img_path) in enumerate(test_images, start=1):
+    for i, (group, true_label, img_file, img_path) in enumerate(test_images, 1):
         try:
-            with open(img_path, "rb") as file:
-                response = requests.post(
-                    API_URL,
-                    files={"file": (img_file, file, "image/png")},
-                    params={"top_k": 3},
-                    timeout=30,
-                )
+            with open(img_path, "rb") as f:
+                resp = requests.post(API_URL, files={"file": (img_file, f, "image/png")}, params={"top_k": 3}, timeout=30)
 
-            if response.status_code != 200:
-                top_labels = [f"HTTP_{response.status_code}", "NONE", "NONE"]
-                results.append(
-                    {
-                        "group": group,
-                        "true": true_label,
-                        "top1_label": top_labels[0],
-                        "top2_label": top_labels[1],
-                        "top3_label": top_labels[2],
-                        "top1": False,
-                        "top2": False,
-                        "top3": False,
-                        "score": 0,
-                        "image_path": img_path,
-                    }
-                )
+            if resp.status_code != 200:
+                results.append({"group": group, "true": true_label, "top1_label": f"HTTP_{resp.status_code}",
+                                "top2_label": "", "top3_label": "", "top1": False, "top2": False, "top3": False, "score": 0})
                 group_stats[group]["total"] += 1
-                group_stats[group]["errors"].append(f"{true_label} -> HTTP {response.status_code}")
-                print(f"[{index}/{len(test_images)}] FAIL {true_label}/{img_file}: HTTP {response.status_code}")
+                print(f"[{i}/{total}] FAIL {true_label}/{img_file}: HTTP {resp.status_code}")
                 continue
 
-            top_results = response.json().get("results", [])
-            top_labels = [item.get("label", "NONE") for item in top_results[:3]]
-            while len(top_labels) < 3:
-                top_labels.append("NONE")
+            top = resp.json().get("results", [])
+            labels = [r.get("label", "") for r in top[:3]]
+            while len(labels) < 3:
+                labels.append("")
 
-            top1_label, top2_label, top3_label = top_labels[:3]
-            ok1 = true_label == top1_label
-            ok2 = true_label in top_labels[:2]
-            ok3 = true_label in top_labels[:3]
-            score = top_results[0].get("score", 0) if top_results else 0
+            ok1 = true_label == labels[0]
+            ok2 = true_label in labels[:2]
+            ok3 = true_label in labels[:3]
+            score = top[0].get("score", 0) if top else 0
 
-            results.append(
-                {
-                    "group": group,
-                    "true": true_label,
-                    "top1_label": top1_label,
-                    "top2_label": top2_label,
-                    "top3_label": top3_label,
-                    "top1": ok1,
-                    "top2": ok2,
-                    "top3": ok3,
-                    "score": score,
-                    "image_path": img_path,
-                }
-            )
+            results.append({"group": group, "true": true_label, "top1_label": labels[0],
+                            "top2_label": labels[1], "top3_label": labels[2],
+                            "top1": ok1, "top2": ok2, "top3": ok3, "score": score})
 
-            group_stats[group]["total"] += 1
-            if ok1:
-                group_stats[group]["correct1"] += 1
-            else:
-                group_stats[group]["errors"].append(f"{true_label} -> {top1_label}")
-            if ok2:
-                group_stats[group]["correct2"] += 1
-            if ok3:
-                group_stats[group]["correct3"] += 1
+            gs = group_stats[group]
+            gs["total"] += 1
+            if ok1: gs["c1"] += 1
+            else: gs["errors"].append(f"{true_label} -> {labels[0]}")
+            if ok2: gs["c2"] += 1
+            if ok3: gs["c3"] += 1
 
-            mark = "OK" if ok1 else "NO"
-            print(f"[{index}/{len(test_images)}] {mark} {true_label} -> {top1_label} ({score:.0%})")
+            print(f"[{i}/{total}] {'OK' if ok1 else 'NO'} {true_label} -> {labels[0]} ({score:.0%})")
 
-        except Exception as exc:
-            print(f"[{index}/{len(test_images)}] ERROR {true_label}/{img_file}: {exc}")
+        except Exception as e:
+            print(f"[{i}/{total}] ERROR {true_label}/{img_file}: {e}")
 
     if not results:
-        print("Không có kết quả đánh giá.")
+        print("Không có kết quả.")
         return
 
-    c1 = sum(1 for item in results if item["top1"])
-    c2 = sum(1 for item in results if item["top2"])
-    c3 = sum(1 for item in results if item["top3"])
-    total = len(results)
+    n = len(results)
+    c1 = sum(1 for r in results if r["top1"])
+    c2 = sum(1 for r in results if r["top2"])
+    c3 = sum(1 for r in results if r["top3"])
 
-    print("\n" + "=" * 50)
-    print("KẾT QUẢ ĐÁNH GIÁ")
-    print("=" * 50)
-    print(f"Tổng ảnh: {total}")
-    print(f"Top-1 Accuracy: {c1}/{total} = {c1 / total:.1%}")
-    print(f"Top-2 Accuracy: {c2}/{total} = {c2 / total:.1%}")
-    print(f"Top-3 Accuracy: {c3}/{total} = {c3 / total:.1%}")
+    print(f"\n{'='*50}")
+    print(f"Top-1: {c1}/{n} = {c1/n:.1%}")
+    print(f"Top-2: {c2}/{n} = {c2/n:.1%}")
+    print(f"Top-3: {c3}/{n} = {c3/n:.1%}")
 
     print("\nTheo nhóm:")
-    for group, stats in sorted(group_stats.items()):
-        total_group = stats["total"]
-        if total_group == 0:
+    for g, s in sorted(group_stats.items()):
+        if s["total"] == 0:
             continue
-        a1 = stats["correct1"] / total_group
-        a2 = stats["correct2"] / total_group
-        a3 = stats["correct3"] / total_group
-        print(
-            f"  {group}: "
-            f"Top1={a1:.1%}, Top2={a2:.1%}, Top3={a3:.1%} "
-            f"({stats['correct1']}/{total_group})"
-        )
-        for error in stats["errors"][:5]:
-            print(f"    - {error}")
+        t = s["total"]
+        print(f"  {g}: Top1={s['c1']/t:.0%} Top2={s['c2']/t:.0%} Top3={s['c3']/t:.0%} ({s['c1']}/{t})")
+        for e in s["errors"][:5]:
+            print(f"    - {e}")
 
-    pd.DataFrame(results).to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
-    print(f"\nChi tiết đã lưu: {OUTPUT_CSV}")
+    df = pd.DataFrame(results)
+    summary = pd.DataFrame([
+        {"group": "TOTAL", "true": f"{n} ảnh",
+         "top1_label": f"Top-1: {c1/n:.1%}", "top2_label": f"Top-2: {c2/n:.1%}",
+         "top3_label": f"Top-3: {c3/n:.1%}", "top1": c1, "top2": c2, "top3": c3, "score": ""}
+    ])
+    for g, s in sorted(group_stats.items()):
+        if s["total"] == 0:
+            continue
+        t = s["total"]
+        summary = pd.concat([summary, pd.DataFrame([
+            {"group": g, "true": f"{t} ảnh",
+             "top1_label": f"Top-1: {s['c1']/t:.1%}", "top2_label": f"Top-2: {s['c2']/t:.1%}",
+             "top3_label": f"Top-3: {s['c3']/t:.1%}", "top1": s["c1"], "top2": s["c2"], "top3": s["c3"], "score": ""}
+        ])])
+
+    df = pd.concat([df, pd.DataFrame([{}]), summary], ignore_index=True)
+    df.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
+    print(f"\nĐã lưu: {OUTPUT_CSV}")
 
 
 if __name__ == "__main__":

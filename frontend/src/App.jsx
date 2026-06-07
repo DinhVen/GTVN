@@ -9,9 +9,7 @@ const FALLBACK_LOGO_SRC = '/favicon.svg';
 const PLACEHOLDER_IMAGE_SRC = 'https://via.placeholder.com/200?text=Loi+Anh';
 const DEFAULT_CROP = { unit: '%', width: 80, height: 80, x: 10, y: 10 };
 const LOADED_IMAGE_CROP = { unit: '%', width: 90, height: 90, x: 5, y: 5 };
-const LABEL_ALIASES = {
-  'P.127_50': 'P.127',
-};
+
 
 const SHAPES = [
   { value: 'rect', title: 'Chữ nhật', icon: RectIcon },
@@ -154,19 +152,14 @@ function displayMeaning(meaning) {
   return meaning && meaning !== 'nan' && meaning !== 'Unknown' ? meaning : 'Đang cập nhật...';
 }
 
-function displayLabel(label) {
-  return LABEL_ALIASES[label] || label;
-}
-
 function normalizeResults(rawResults) {
   const seenLabels = new Set();
 
   return rawResults.reduce((items, item) => {
-    const label = displayLabel(item.label);
-    if (seenLabels.has(label)) return items;
+    if (seenLabels.has(item.label)) return items;
 
-    seenLabels.add(label);
-    items.push({ ...item, label });
+    seenLabels.add(item.label);
+    items.push(item);
     return items;
   }, []);
 }
