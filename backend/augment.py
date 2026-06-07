@@ -4,11 +4,14 @@ Chạy: python backend/augment.py
 """
 
 import os
+import sys
 
 import cv2
 import numpy as np
 import pandas as pd
 from PIL import Image, ImageEnhance, ImageFilter
+
+sys.stdout.reconfigure(encoding="utf-8")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -16,11 +19,11 @@ DATASET_DIR = os.path.join(BASE_DIR, "dataset_aug")
 METADATA_PATH = os.path.join(DATA_DIR, "metadata.csv")
 
 GROUP_FOLDERS = {
-    "Prohibitory Signs": "cấm",
-    "Warning Signs": "nguy hiểm",
-    "Mandatory Signs": "hiệu lệnh",
-    "Information Signs": "chỉ dẫn",
-    "Supplementary Signs": "biển phụ",
+    "Biển cấm": "cấm",
+    "Biển nguy hiểm": "nguy hiểm",
+    "Biển hiệu lệnh": "hiệu lệnh",
+    "Biển chỉ dẫn": "chỉ dẫn",
+    "Biển phụ": "biển phụ",
 }
 
 ROTATION_ANGLES = [10, -10, 20, -20, 30, -30, 45, -45]
@@ -149,8 +152,8 @@ def main():
 
     new_df = new_df.drop_duplicates(subset=["image_path"])
     new_df.to_csv(METADATA_PATH, index=False)
-    print(f"\nKết quả: {total_signs} biển, {len(new_df)} ảnh.")
-    print("Tiếp theo: python backend/rebuild_faiss.py")
+    print(f"\nResult: {total_signs} signs, {len(new_df)} images.")
+    print("Next: python backend/rebuild_faiss.py")
 
 
 if __name__ == "__main__":

@@ -31,8 +31,8 @@ Dữ liệu được tổ chức theo định hướng QCVN 41, gồm 5 nhóm bi
 
 | Nội dung | Giá trị |
 |---|---|
-| Số mã biển | 354 mã biển |
-| Số dòng metadata/index | 7.117 ảnh |
+| Số mã biển | 382 mã biển |
+| Số dòng metadata/index | 7.989 ảnh |
 | Kích thước vector | 768 chiều |
 | File metadata | `data/metadata.csv` |
 | File embedding | `data/image_embeddings.npy` |
@@ -311,3 +311,5 @@ Ví dụ JSON trả về:
   ]
 }
 ```
+
+Trường Đại học Quy Nhơn, Tháng 6/2026
