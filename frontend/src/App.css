@@ -145,21 +145,22 @@
 
 .guide-item {
   display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 10px;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
   align-items: flex-start;
 }
 
 .guide-icon {
   display: inline-flex;
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  background: #e8f0ff;
-  border: 1px solid #c7d8ff;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: #edf5ff;
+  border: 1px solid #b9d8ff;
   align-items: center;
   justify-content: center;
-  color: #1d5fd1;
+  color: #0f63ce;
+  box-shadow: inset 0 -1px 0 rgba(15, 99, 206, 0.08);
 }
 
 .guide-item h3 {

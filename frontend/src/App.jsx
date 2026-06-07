@@ -5,7 +5,6 @@ import './App.css';
 
 const API_BASE_URL = 'http://localhost:8000';
 const BRAND_LOGO_SRC = '/logo GTVN.png';
-const FALLBACK_LOGO_SRC = '/favicon.svg';
 const PLACEHOLDER_IMAGE_SRC = 'https://via.placeholder.com/200?text=Loi+Anh';
 const DEFAULT_CROP = { unit: '%', width: 80, height: 80, x: 10, y: 10 };
 const LOADED_IMAGE_CROP = { unit: '%', width: 90, height: 90, x: 5, y: 5 };
@@ -272,29 +271,34 @@ function QuickGuide() {
 
 function UploadGuideIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path d="M12 16V4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M7 9l5-5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M5 20h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <svg width="18" height="18" viewBox="0 0 24 24">
+      <rect x="4" y="5" width="16" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="9" cy="10" r="1.4" fill="currentColor" />
+      <path d="M6.5 17l4.2-4.3 2.8 2.8 1.8-1.9L19 17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4v6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9.6 6.3L12 4l2.4 2.3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function CropGuideIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path d="M7 3v14a2 2 0 0 0 2 2h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M3 7h14a2 2 0 0 1 2 2v14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M7 7h10v10H7z" fill="none" stroke="currentColor" strokeWidth="2" />
+    <svg width="18" height="18" viewBox="0 0 24 24">
+      <path d="M5 9V6.5A1.5 1.5 0 0 1 6.5 5H9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M15 5h2.5A1.5 1.5 0 0 1 19 6.5V9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M19 15v2.5a1.5 1.5 0 0 1-1.5 1.5H15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 19H6.5A1.5 1.5 0 0 1 5 17.5V15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M12 8.6v2M12 13.4v2M8.6 12h2M13.4 12h2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   );
 }
 
 function ResultGuideIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24">
-      <path d="M5 12l4 4L19 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 20h16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <svg width="18" height="18" viewBox="0 0 24 24">
+      <path d="M12 3l8.5 15H3.5L12 3z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M9.2 13l2 2 4-4.5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -305,10 +309,6 @@ function BrandLogo() {
       src={BRAND_LOGO_SRC}
       alt="Logo nhận diện biển báo"
       className="brand-logo"
-      onError={(event) => {
-        event.currentTarget.onerror = null;
-        event.currentTarget.src = FALLBACK_LOGO_SRC;
-      }}
     />
   );
 }

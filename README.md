@@ -31,8 +31,8 @@ Dữ liệu được tổ chức theo định hướng QCVN 41, gồm 5 nhóm bi
 
 | Nội dung | Giá trị |
 |---|---|
-| Số mã biển | 326 mã biển |
-| Số dòng metadata/index | 6.983 ảnh |
+| Số mã biển | 332 mã biển |
+| Số dòng metadata/index | 7.095 ảnh |
 | Kích thước vector | 768 chiều |
 | File metadata | `data/metadata.csv` |
 | File embedding | `data/image_embeddings.npy` |
@@ -251,6 +251,8 @@ GTVN/
     requirements.txt
 
   frontend/
+    public/
+      logo GTVN.png      # Logo và favicon của hệ thống
     src/
       App.jsx            # Giao diện chính
       App.css            # Style giao diện
@@ -285,6 +287,13 @@ Khi người dùng gửi ảnh lên API `/search`, backend xử lý theo các b�
 9. Lọc trùng theo `label`.
 10. Trả JSON kết quả cho frontend.
 
+Độ tương đồng hiển thị được tính từ điểm cuối:
+
+```text
+final_score = visual_score + group_score + mirror_score
+similarity = min(final_score / 1.35, 0.99) x 100%
+```
+
 Ví dụ JSON trả về:
 
 ```json
@@ -310,4 +319,3 @@ Ví dụ JSON trả về:
 - Nếu ảnh kết quả không hiện, kiểm tra `image_path` trong `metadata.csv` và mount static `/dataset_aug`.
 - Nếu thay đổi dữ liệu, phải chạy lại `rebuild_faiss.py`.
 - Không cần upload file báo cáo Word/PowerPoint lên GitHub; các file này đã được đưa vào `.gitignore`.
-

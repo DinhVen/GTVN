@@ -20,6 +20,7 @@ GROUP_FOLDERS = {
     "Warning Signs": "nguy hiểm",
     "Mandatory Signs": "hiệu lệnh",
     "Information Signs": "chỉ dẫn",
+    "Supplementary Signs": "biển phụ",
 }
 
 ROTATION_ANGLES = [10, -10, 20, -20, 30, -30, 45, -45]
