@@ -19,3 +19,5 @@ env/
 BAO_CAO_CONG_VIEC.txt
 BAO_CAO_DO_AN.md
 thuyetminhdetai.txt
+*.docx
+*.pptx
