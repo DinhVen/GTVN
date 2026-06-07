@@ -311,11 +311,3 @@ Ví dụ JSON trả về:
   ]
 }
 ```
-
-## 13. Ghi chú khi triển khai
-
-- Backend phải chạy trước frontend.
-- Nếu frontend không gọi được API, kiểm tra backend có đang chạy tại `localhost:8000` không.
-- Nếu ảnh kết quả không hiện, kiểm tra `image_path` trong `metadata.csv` và mount static `/dataset_aug`.
-- Nếu thay đổi dữ liệu, phải chạy lại `rebuild_faiss.py`.
-- Không cần upload file báo cáo Word/PowerPoint lên GitHub; các file này đã được đưa vào `.gitignore`.

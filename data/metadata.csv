@@ -1,4 +1,4 @@
-image_path,group,group_source,label,class_id,meaning,advice
+﻿image_path,group,group_source,label,class_id,meaning,advice
 dataset_aug/Prohibitory Signs/P.101/1.png,cấm,Prohibitory Signs,P.101,,Đường cấm (cấm mọi phương tiện cả 2 hướng),"Tuyệt đối không đi vào, vi phạm bị xử phạt nặng."
 dataset_aug/Prohibitory Signs/P.101/1_blur.png,cấm,Prohibitory Signs,P.101,,Đường cấm (cấm mọi phương tiện cả 2 hướng),"Tuyệt đối không đi vào, vi phạm bị xử phạt nặng."
 dataset_aug/Prohibitory Signs/P.101/1_bright.png,cấm,Prohibitory Signs,P.101,,Đường cấm (cấm mọi phương tiện cả 2 hướng),"Tuyệt đối không đi vào, vi phạm bị xử phạt nặng."
@@ -3752,42 +3752,42 @@ dataset_aug/Warning Signs/W.246c/1_shear_5deg_zoom_in.png,nguy hiểm,Warning Si
 dataset_aug/Warning Signs/W.246c/1_shear_5deg_zoom_out.png,nguy hiểm,Warning Signs,W.246c,,Chướng ngại vật vòng tránh sang phải,"Có chướng ngại vật, chỉ vòng sang phải."
 dataset_aug/Warning Signs/W.246c/1_zoom_in.png,nguy hiểm,Warning Signs,W.246c,,Chướng ngại vật vòng tránh sang phải,"Có chướng ngại vật, chỉ vòng sang phải."
 dataset_aug/Warning Signs/W.246c/1_zoom_out.png,nguy hiểm,Warning Signs,W.246c,,Chướng ngại vật vòng tránh sang phải,"Có chướng ngại vật, chỉ vòng sang phải."
-dataset_aug/Warning Signs/W.247/1.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_blur.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_bright.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_dark.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_original.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_persp1.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_persp2.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot-10.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot-20.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot-30.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot-45.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot10.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot20.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot30.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_rot45.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_zoom_in.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Warning Signs/W.247/1_zoom_out.png,nguy hiểm,Warning Signs,W.247,,,
-dataset_aug/Mandatory Signs/R.122/1.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_blur.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_bright.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_dark.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_original.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_persp1.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_persp2.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot-10.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot-20.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot-30.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot-45.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot10.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot20.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot30.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_rot45.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_shear_5deg.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_shear_m5deg.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_zoom_in.png,hiệu lệnh,Mandatory Signs,R.122,,,
-dataset_aug/Mandatory Signs/R.122/1_zoom_out.png,hiệu lệnh,Mandatory Signs,R.122,,,
+dataset_aug/Warning Signs/W.247/1.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_blur.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_bright.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_dark.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_original.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_persp1.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_persp2.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot-10.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot-20.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot-30.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot-45.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot10.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot20.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot30.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_rot45.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_zoom_in.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Warning Signs/W.247/1_zoom_out.png,nguy hiểm,Warning Signs,W.247,,Chưa có ảnh mẫu hợp lệ cho mã W.247,Cần bổ sung ảnh biển W.247 thật trước khi sử dụng kết quả này.
+dataset_aug/Mandatory Signs/R.122/1.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_blur.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_bright.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_dark.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_original.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_persp1.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_persp2.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot-10.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot-20.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot-30.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot-45.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot10.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot20.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot30.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_rot45.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_shear_5deg.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_shear_m5deg.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_zoom_in.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
+dataset_aug/Mandatory Signs/R.122/1_zoom_out.png,hiệu lệnh,Mandatory Signs,R.122,,Dừng lại (STOP),"Phải dừng xe hoàn toàn trước vạch dừng hoặc trước nơi đặt biển, quan sát an toàn rồi mới đi tiếp."
 dataset_aug/Mandatory Signs/R.301a/1.png,hiệu lệnh,Mandatory Signs,R.301a,,Hướng đi phải theo: chỉ được đi thẳng,"Bắt buộc đi thẳng, không được rẽ."
 dataset_aug/Mandatory Signs/R.301a/1_blur.png,hiệu lệnh,Mandatory Signs,R.301a,,Hướng đi phải theo: chỉ được đi thẳng,"Bắt buộc đi thẳng, không được rẽ."
 dataset_aug/Mandatory Signs/R.301a/1_bright.png,hiệu lệnh,Mandatory Signs,R.301a,,Hướng đi phải theo: chỉ được đi thẳng,"Bắt buộc đi thẳng, không được rẽ."
@@ -4767,99 +4767,99 @@ dataset_aug/Mandatory Signs/R.421/1_shear_5deg.png,hiệu lệnh,Mandatory Signs
 dataset_aug/Mandatory Signs/R.421/1_shear_m5deg.png,hiệu lệnh,Mandatory Signs,R.421,,Hết khu đông dân cư,"Hết khu dân cư, có thể tăng tốc theo quy định."
 dataset_aug/Mandatory Signs/R.421/1_zoom_in.png,hiệu lệnh,Mandatory Signs,R.421,,Hết khu đông dân cư,"Hết khu dân cư, có thể tăng tốc theo quy định."
 dataset_aug/Mandatory Signs/R.421/1_zoom_out.png,hiệu lệnh,Mandatory Signs,R.421,,Hết khu đông dân cư,"Hết khu dân cư, có thể tăng tốc theo quy định."
-"dataset_aug/Mandatory Signs/R.E,10a/1.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10a/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Phần đường xe hai bánh rẽ trái qua nút giao,Xe hai bánh rẽ trái theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_original.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10b/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Phần đường xe hai bánh rẽ phải qua nút giao,Xe hai bánh rẽ phải theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10c/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Phần đường xe hai bánh đi thẳng qua nút giao,Xe hai bánh đi thẳng theo phần đường chỉ định.
-"dataset_aug/Mandatory Signs/R.E,10d/1.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
-"dataset_aug/Mandatory Signs/R.E,10d/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Phần đường xe hai bánh phức hợp qua nút giao,Xe hai bánh đi theo chỉ dẫn tại nút giao.
+"dataset_aug/Mandatory Signs/R.E,10a/1.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10a/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10a",,Kết thúc khu vực cấm dừng xe và đỗ xe,"Hết hiệu lực khu vực cấm dừng, đỗ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_original.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_5deg_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10b/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10b",,Kết thúc khu vực cấm dừng xe và đỗ xe theo thời gian,"Hết hiệu lực cấm dừng, đỗ theo khung giờ; tiếp tục tuân thủ biển báo tiếp theo."
+"dataset_aug/Mandatory Signs/R.E,10c/1.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10c/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10c",,Kết thúc khu vực đỗ xe,Hết khu vực đỗ xe; chỉ đỗ xe ở nơi được phép theo biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+"dataset_aug/Mandatory Signs/R.E,10d/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,10d",,Kết thúc khu vực hạn chế tốc độ tối đa 50 km/h,Hết hiệu lực giới hạn 50 km/h theo khu vực; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
 "dataset_aug/Mandatory Signs/R.E,11a/1.png",hiệu lệnh,Mandatory Signs,"R.E,11a",,Vạch dừng xe cho xe hai bánh bên trái,Xe hai bánh dừng đúng vạch bên trái khi đèn đỏ.
 "dataset_aug/Mandatory Signs/R.E,11a/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,11a",,Vạch dừng xe cho xe hai bánh bên trái,Xe hai bánh dừng đúng vạch bên trái khi đèn đỏ.
 "dataset_aug/Mandatory Signs/R.E,11a/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,11a",,Vạch dừng xe cho xe hai bánh bên trái,Xe hai bánh dừng đúng vạch bên trái khi đèn đỏ.
@@ -4897,98 +4897,98 @@ dataset_aug/Mandatory Signs/R.421/1_zoom_out.png,hiệu lệnh,Mandatory Signs,R
 "dataset_aug/Mandatory Signs/R.E,11b/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,11b",,Vạch dừng xe cho xe hai bánh bên phải,Xe hai bánh dừng đúng vạch bên phải khi đèn đỏ.
 "dataset_aug/Mandatory Signs/R.E,11b/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,11b",,Vạch dừng xe cho xe hai bánh bên phải,Xe hai bánh dừng đúng vạch bên phải khi đèn đỏ.
 "dataset_aug/Mandatory Signs/R.E,11b/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,11b",,Vạch dừng xe cho xe hai bánh bên phải,Xe hai bánh dừng đúng vạch bên phải khi đèn đỏ.
-"dataset_aug/Mandatory Signs/R.E,9a/1.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9a/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Nơi dừng xe buýt bên phải phía trước,"Trạm xe buýt bên phải, xe khác không đỗ chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9b/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Nơi dừng xe buýt bên trái phía trước,"Trạm xe buýt bên trái, không đỗ xe chắn trạm."
-"dataset_aug/Mandatory Signs/R.E,9c/1.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9c/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Nơi dừng xe buýt bên phải phía sau,Trạm xe buýt phía sau bên phải.
-"dataset_aug/Mandatory Signs/R.E,9d/1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_original.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
-"dataset_aug/Mandatory Signs/R.E,9d/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Nơi dừng xe buýt bên trái phía sau,Trạm xe buýt phía sau bên trái.
+"dataset_aug/Mandatory Signs/R.E,9a/1.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9a/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9a",,Bắt đầu khu vực cấm dừng xe và đỗ xe,"Không dừng, đỗ xe trong khu vực này theo quy định trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9b/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9b",,Bắt đầu khu vực cấm dừng xe và đỗ xe theo thời gian,"Không dừng, đỗ xe trong khung giờ ghi trên biển."
+"dataset_aug/Mandatory Signs/R.E,9c/1.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9c/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9c",,Bắt đầu khu vực đỗ xe,Được đỗ xe trong khu vực theo đúng quy định và chỉ dẫn.
+"dataset_aug/Mandatory Signs/R.E,9d/1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_original.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_blur.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_bright.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_dark.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_original.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_persp1.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_persp2.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot-45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot10.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot20.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot30.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_rot45.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_shear_5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_shear_m5deg.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_shear_5deg_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_zoom_in.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
+"dataset_aug/Mandatory Signs/R.E,9d/1_zoom_out.png",hiệu lệnh,Mandatory Signs,"R.E,9d",,Bắt đầu khu vực hạn chế tốc độ tối đa 50 km/h,Không chạy quá 50 km/h trong khu vực này.
 dataset_aug/Information Signs/I.401/1.png,chỉ dẫn,Information Signs,I.401,,Bắt đầu đường ưu tiên,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.
 dataset_aug/Information Signs/I.401/1_blur.png,chỉ dẫn,Information Signs,I.401,,Bắt đầu đường ưu tiên,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.
 dataset_aug/Information Signs/I.401/1_bright.png,chỉ dẫn,Information Signs,I.401,,Bắt đầu đường ưu tiên,Xe trên đường này được quyền đi trước tại nơi giao nhau không đèn tín hiệu.
@@ -6982,115 +6982,115 @@ dataset_aug/Information Signs/I.449/1_shear_5deg.png,chỉ dẫn,Information Sig
 dataset_aug/Information Signs/I.449/1_shear_m5deg.png,chỉ dẫn,Information Signs,I.449,,Số hiệu đường quốc tế (Asian Highway),Đường thuộc mạng lưới đường bộ xuyên Á (Asian Highway Network).
 dataset_aug/Information Signs/I.449/1_zoom_in.png,chỉ dẫn,Information Signs,I.449,,Số hiệu đường quốc tế (Asian Highway),Đường thuộc mạng lưới đường bộ xuyên Á (Asian Highway Network).
 dataset_aug/Information Signs/I.449/1_zoom_out.png,chỉ dẫn,Information Signs,I.449,,Số hiệu đường quốc tế (Asian Highway),Đường thuộc mạng lưới đường bộ xuyên Á (Asian Highway Network).
-dataset_aug/Supplementary Signs/DP.127a/1.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_blur.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_bright.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_dark.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_original.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_persp1.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_persp2.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot-10.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot-20.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot-30.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot-45.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot10.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot20.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot30.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_rot45.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127a/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127a,,,
-dataset_aug/Supplementary Signs/DP.127b/1.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_blur.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_bright.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_dark.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_original.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_persp1.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_persp2.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot-10.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot-20.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot-30.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot-45.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot10.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot20.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot30.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_rot45.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127b/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127b,,,
-dataset_aug/Supplementary Signs/DP.127c/1.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_blur.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_bright.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_dark.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_original.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_persp1.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_persp2.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot-10.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot-20.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot-30.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot-45.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot10.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot20.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot30.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_rot45.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.127c/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127c,,,
-dataset_aug/Supplementary Signs/DP.133/1.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_blur.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_bright.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_dark.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_original.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_persp1.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_persp2.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot-10.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot-20.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot-30.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot-45.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot10.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot20.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot30.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_rot45.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_zoom_in.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.133/1_zoom_out.png,biển phụ,Supplementary Signs,DP.133,,,
-dataset_aug/Supplementary Signs/DP.134/1.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_blur.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_bright.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_dark.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_original.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_persp1.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_persp2.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot-10.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot-20.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot-30.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot-45.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot10.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot20.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot30.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_rot45.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_zoom_in.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.134/1_zoom_out.png,biển phụ,Supplementary Signs,DP.134,,,
-dataset_aug/Supplementary Signs/DP.135/1.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_blur.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_bright.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_dark.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_original.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_persp1.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_persp2.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot-10.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot-20.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot-30.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot-45.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot10.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot20.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot30.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_rot45.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_zoom_in.png,biển phụ,Supplementary Signs,DP.135,,,
-dataset_aug/Supplementary Signs/DP.135/1_zoom_out.png,biển phụ,Supplementary Signs,DP.135,,,
+dataset_aug/Supplementary Signs/DP.127a/1.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_blur.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_bright.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_dark.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_original.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_persp1.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_persp2.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot-10.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot-20.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot-30.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot-45.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot10.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot20.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot30.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_rot45.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127a/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127a,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc quy định tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_blur.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_bright.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_dark.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_original.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_persp1.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_persp2.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot-10.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot-20.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot-30.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot-45.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot10.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot20.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot30.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_rot45.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127b/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127b,,Hết đoạn đường quy định tốc độ tối đa theo từng làn đường,Kết thúc giới hạn tốc độ theo từng làn; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_blur.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_bright.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_dark.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_original.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_persp1.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_persp2.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot-10.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot-20.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot-30.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot-45.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot10.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot20.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot30.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_rot45.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_zoom_in.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.127c/1_zoom_out.png,biển phụ,Supplementary Signs,DP.127c,,Hết đoạn đường quy định tốc độ tối đa theo làn và loại phương tiện,Kết thúc giới hạn tốc độ theo làn hoặc loại xe; tiếp tục chạy theo quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.133/1.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_blur.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_bright.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_dark.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_original.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_persp1.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_persp2.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot-10.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot-20.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot-30.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot-45.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot10.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot20.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot30.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_rot45.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_zoom_in.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.133/1_zoom_out.png,biển phụ,Supplementary Signs,DP.133,,Hết cấm vượt,Hết đoạn cấm vượt; chỉ vượt khi đủ điều kiện an toàn và đúng quy định.
+dataset_aug/Supplementary Signs/DP.134/1.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_blur.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_bright.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_dark.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_original.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_persp1.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_persp2.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot-10.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot-20.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot-30.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot-45.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot10.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot20.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot30.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_rot45.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_shear_5deg.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_zoom_in.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.134/1_zoom_out.png,biển phụ,Supplementary Signs,DP.134,,Hết hạn chế tốc độ tối đa,Hết hiệu lực giới hạn tốc độ đã ghi; tiếp tục chạy theo quy định tốc độ chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_blur.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_bright.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_dark.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_original.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_persp1.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_persp2.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot-10.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot-20.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot-30.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot-45.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot10.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot20.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot30.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_rot45.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_shear_m5deg.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_zoom_in.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
+dataset_aug/Supplementary Signs/DP.135/1_zoom_out.png,biển phụ,Supplementary Signs,DP.135,,Hết tất cả các lệnh cấm,Các lệnh cấm trước đó hết hiệu lực; tiếp tục tuân thủ quy định chung và biển báo tiếp theo.
