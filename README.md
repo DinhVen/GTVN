@@ -40,7 +40,7 @@ Dữ liệu được tổ chức theo định hướng QCVN 41, gồm 5 nhóm bi
 | Thư mục ảnh | `dataset_aug/` |
 | Thư mục test | `data_test/` |
 
-5 nhóm biển theo cấu trúc dữ liệu:
+Dataset được chia thành 5 nhóm biển theo cấu trúc thư mục sau:
 
 | Nhóm | Thư mục tương ứng |
 |---|---|
