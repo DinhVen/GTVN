@@ -220,7 +220,7 @@ def load_resources():
 def health_check():
     return {"message": "Traffic Sign Recognition API is running!"}
 
-
+#API
 @app.post("/search")
 async def search_sign(file: UploadFile = File(...), top_k: int = 3):
     if not all(r is not None for r in (model, processor, faiss_index, metadata_records)):

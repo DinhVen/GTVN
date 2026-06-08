@@ -1,16 +1,3 @@
-"""
-Xây dựng FAISS index từ toàn bộ ảnh trong metadata.csv.
-
-Quy trình:
-  1. Load CLIP model
-  2. Duyệt metadata.csv → encode từng ảnh thành vector 768 chiều
-  3. Chuẩn hóa L2 (normalize)
-  4. Tạo FAISS IndexFlatIP (Inner Product)
-  5. Lưu faiss_index.faiss + image_embeddings.npy
-
-Chạy: python backend/rebuild_faiss.py
-"""
-
 import os
 
 import faiss
