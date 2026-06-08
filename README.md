@@ -44,11 +44,11 @@ Dataset được chia thành 5 nhóm biển theo cấu trúc thư mục sau:
 
 | Nhóm | Thư mục tương ứng |
 |---|---|
-| Biển cấm | `dataset_aug/Prohibitory Signs/` |
-| Biển nguy hiểm | `dataset_aug/Warning Signs/` |
-| Biển hiệu lệnh | `dataset_aug/Mandatory Signs/` |
-| Biển chỉ dẫn | `dataset_aug/Information Signs/` |
-| Biển phụ | `dataset_aug/Supplementary Signs/` |
+| Biển cấm | `dataset_aug/Biển cấm/` |
+| Biển nguy hiểm | `dataset_aug/Biển nguy hiểm/` |
+| Biển hiệu lệnh | `dataset_aug/Biển hiệu lệnh/` |
+| Biển chỉ dẫn | `dataset_aug/Biển chỉ dẫn/` |
+| Biển phụ | `dataset_aug/Biển phụ/` |
 
 
 ## 4. Clone project từ GitHub
@@ -263,11 +263,11 @@ GTVN/
     faiss_index.faiss    # Chỉ mục FAISS
 
   dataset_aug/
-    Prohibitory Signs/   # Biển cấm
-    Warning Signs/       # Biển nguy hiểm
-    Mandatory Signs/     # Biển hiệu lệnh
-    Information Signs/   # Biển chỉ dẫn
-    Supplementary Signs/ # Biển phụ
+    Biển cấm/
+    Biển nguy hiểm/
+    Biển hiệu lệnh/
+    Biển chỉ dẫn/
+    Biển phụ/
 
   data_test/             # Ảnh dùng để đánh giá
 ```
@@ -306,7 +306,7 @@ Ví dụ JSON trả về:
       "group": "cấm",
       "meaning": "Cấm rẽ phải",
       "advice": "Không được rẽ phải, đi thẳng hoặc rẽ trái.",
-      "image_path": "dataset_aug/Prohibitory Signs/P.123b/1_original.png"
+      "image_path": "dataset_aug/Biển cấm/P.123b/1_original.png"
     }
   ]
 }
